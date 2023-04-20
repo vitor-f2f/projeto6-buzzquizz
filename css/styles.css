@@ -212,6 +212,61 @@ body {
  .esbranquicado{
     opacity: 0.5;
  }
+
+ .finalizacao-quiz{
+    width: 50%;
+    margin: 70px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+ }
+ .pontuacao{
+    width: 100%;
+    height: 99px;
+    background-color: #EC362D;
+
+    color: #FFFFFF;
+    font-size: 23px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 100px;
+    
+ }
+ .cont-descricao{
+    width: 100%;
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+ }
+ .cont-descricao img{
+    width: 55%;
+    height: 45vh;
+ }
+ .cont-descricao span{
+    font-size: 19px;
+    font-weight: 700;
+    width: 43%;
+    line-height: 25px;
+ }
+
+ .reiniciar{
+    cursor: pointer;
+    width: 260px;
+    height: 52px;
+    border: none;
+    background-color: #EC362D;
+    border-radius: 15px;
+    margin: 70px 0  20px;
+    color: #FFF5F4;
+    font-size: 21px;
+    font-weight: 400;
+ }
+ .voltar-home{
+    color: #818181;
+    font-size: 21px;
+    font-weight: 400;
+ }
  /* ------------------------------------------------------ */
 
 .tela3{
