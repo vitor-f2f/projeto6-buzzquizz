@@ -17,16 +17,43 @@
     </head>
     <body>
         <div class="header">BuzzQuizz</div>
-        <div class="">
-            <div class="nenhumQuizz">
-                <div class="">Você não criou nenhum quizz ainda</div>
-                <button onclick="criarQuizz()"></button>
+        <div class="paginaInicial">
+            <div class="nenhumQuizz hidden">
+                <p>Você não criou nenhum <br /> quizz ainda :(</p>
+                <button onclick="criarQuizz()">Criar Quizz</button>
             </div>
             <div class="seusQuizzes">
-                <button onclick="criarQuizz()"><ion-icon name="add-circle"></ion-icon></button>
-                <div class="containerQuizzes"></div>
+                <div class="headline">
+                    <p>Seus Quizzes</p>
+                    <ion-icon name="add-circle" onclick="criarQuizz()"></ion-icon>
+                </div>
+                <div class="containerQuizzes">
+                    <div class="caixaQuizz">
+                        <img class="thumbnailQuizz" src="https://img.cybercook.com.br/receitas/842/como-fazer-arroz-branco-1.jpeg">
+                        <span class="tituloQuizz">voce gosta de arroz?</span>
+                        <div class="gradientOverlay" onclick="selecionarQuizz()"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="todosQuizzes">
+                <div class="headline">
+                    <p>Todos os Quizzes</p>
+                </div>
+                <div class="containerQuizzes">
+                    <div class="caixaQuizz"></div>
+                </div>
             </div>
         </div>
-        <div class="todosQuizzes"></div>
+        
+        <script
+        type="module"
+        src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+        ></script>
+        <script
+            nomodule
+            src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+        ></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="./scripts.js"></script>
     </body>
 </html>
