@@ -17,15 +17,16 @@
     </head>
     <body>
         <div class="header">BuzzQuizz</div>
-        <div class="paginaInicial">
-            <div class="nenhumQuizz hidden">
-                <p>Você não criou nenhum <br /> quizz ainda :(</p>
-                <button onclick="criarQuizz()">Criar Quizz</button>
-            </div>
-            <div class="seusQuizzes">
-                <div class="headline">
+        <div class="tela1">
+            <div class="paginaInicial">
+                <div class="nenhumQuizz hidden">
+                    <p>Você não criou nenhum <br /> quizz ainda :(</p>
+                    <button onclick="CriarQuizz()">Criar Quizz</button>
+                </div>
+                <div class="seusQuizzes">
+                    <div class="headline">
                     <p>Seus Quizzes</p>
-                    <ion-icon name="add-circle" onclick="criarQuizz()"></ion-icon>
+                    <ion-icon name="add-circle" onclick="CriarQuizz()"></ion-icon>
                 </div>
                 <div class="containerQuizzes">
                     <div class="caixaQuizz">
@@ -37,14 +38,81 @@
             </div>
             <div class="todosQuizzes">
                 <div class="headline">
-                    <p>Todos os Quizzes</p>
+                        <p>Todos os Quizzes</p>
                 </div>
                 <div class="containerQuizzes">
                     <div class="caixaQuizz"></div>
                 </div>
+                </div>
             </div>
         </div>
-        
+
+
+        <div class="tela2 escondido">
+
+        </div>
+
+
+        <div class="tela3 escondido">
+            <div class="pag3_1">
+                <h1 class="titulo">Comece pelo começo</h1>
+                <div class="inputs">
+                    <input class="input" type="text" minlength="20" maxlength="65" placeholder="Título do seu quizz">
+                    <input class="input" type="url" placeholder="URL da imagem do seu quizz">
+                    <input class="input" type="number" min="3" placeholder="Quantidade de perguntas do quizz">
+                    <input class="input" type="number" min="2" placeholder="Quantidade de níveis do quizz">
+                </div>
+                <div class="BotaoVermelho Tela3_ParaPerguntas" onclick="CriarPerguntas()">Prosseguir pra criar perguntas</div>
+            </div>
+            <div class="pag3_2 escondido">
+                <h1 class="titulo">Crie suas perguntas</h1>
+                <div class="inputs">
+                    <h1 class="titulo">Pergunta 1</h1>
+                    <input type="text" class="input" placeholder="Texto da pergunta">
+                    <input type="color" value="#FFFFFF" class="input" placeholder="Cor de fundo da pergunta">
+                </div>
+                <div class="inputs">
+                    <h1 class="titulo">Resposta correta</h1>
+                    <input type="text" class="input" placeholder="Resposta correta">
+                    <input type="url" class="input" placeholder="URL da imagem">
+                </div>
+                <div class="inputs">
+                    <h1 class="titulo">Respostas incorretas</h1>
+                    <input type="text" class="input" placeholder="Resposta incorreta 1">
+                    <input type="url" class="input" placeholder="URL da imagem 1">
+                </div>
+                <div class="inputs">
+                    <input type="text" class="input" placeholder="Resposta incorreta 2">
+                    <input type="url" class="input" placeholder="URL da imagem 2">
+                </div>
+                <div class="inputs">
+                    <input type="text" class="input" placeholder="Resposta incorreta 3">
+                    <input type="url" class="input" placeholder="URL da imagem 3">
+                </div>
+                <div class="aba">
+                    <h1 class="titulo">Pergunta 2</h1>
+                    <ion-icon name="create-outline"></ion-icon>
+                </div>
+                <div class="aba">
+                    <h1 class="titulo">Pergunta 3</h1>
+                    <ion-icon name="create-outline"></ion-icon>
+                </div>
+                <div class="BotaoVermelho Tela3_ParaNives" onclick="CriarNives()">Prosseguir pra criar níveis</div>
+            </div>
+                
+            <div class="pag3_3 escondido">
+                <h1 class="titulo">Agora, decida os níveis! </h1>
+                <div class="inputs">
+                    <h1 class="titulo">Nivel 1</h1>
+                    <input type="text" class="input" placeholder="Título do nível">
+                    <input type="number" class="input" placeholder="% de acerto mínima">
+                    <input type="url" class="input" placeholder="URL da imagem do nível">
+                    <input type="text" class="input" placeholder="Descrição do nível">
+                    <div class="BotaoVermelho Tela3_FinalizarQuizz" onclick="AddQuizz()">Finalizar Quizz</div>
+                </div>
+            </div>
+        </div>
+
         <script
         type="module"
         src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
