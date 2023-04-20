@@ -1,0 +1,19 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    background-color: #e5e5e5;
+}
+
+.header {
+    background-color: #ec362d;
+    font-size: 37px;
+    font-weight: 700;
+    color: white;
+    height: 69px;
+    width: 100%;
+    text-align: center;
+    padding-top: 13px;
+}
