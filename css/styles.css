@@ -99,9 +99,10 @@ body {
     width: 100%;
     min-height: 181px;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     color: #b9b9b9;
     font-size: 20px;
+    margin-top: 10px;
 }
 
 .caixaQuizz {
@@ -111,7 +112,7 @@ body {
     flex-direction: column;
     border-radius: 5px;
     cursor: pointer;
-    margin-right: 15px;
+    margin-right: 10px;
     margin-bottom: 10px;
 }
 
