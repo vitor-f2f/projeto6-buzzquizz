@@ -142,6 +142,77 @@ body {
 }
 
  /* ------------------------------------------------------ */
+ 
+ .tela2{
+    width: 100%;
+ }
+ 
+ .imagem-cabecalho img{
+    width: 100%;
+    height: 227px;
+    object-fit: cover;
+    position: relative;
+ }
+ .mascara-cabecalho{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 227px;
+    background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 60%);
+ }
+.container-perguntas{
+    width: 50%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+ .titulo-pergunta{
+    width: 100%;
+    height: 138px;
+    margin-top: 60px;
+    background-color: #434CA0;
+
+    font-size: 23px;
+    font-weight: 700;
+    line-height: 130px;
+    text-align: center;
+    color: #FFFFFF;
+ }
+ .caixa-questoes{
+    width: 100%;
+    margin-top: 15px;
+
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    
+ }
+ .caixa-questoes img{
+   width: 329px;
+   height: 175px;
+   border-radius: 1px;
+ }
+ .selecionar-questao{
+    display: flex;
+    flex-direction: column;
+ }
+ .selecionar-questao span{
+    line-height: 40px;
+    font-size: 20px;
+    font-weight: 700;
+ }
+ .acertou{
+    color:#009C22;
+ }
+ .errou{
+    color: #FF4B4B;
+ }
+ .esbranquicado{
+    opacity: 0.5;
+ }
+ /* ------------------------------------------------------ */
 
 .tela3{
     display: flex;
