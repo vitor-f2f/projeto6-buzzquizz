@@ -41,6 +41,12 @@ function CriarQuizz(){
     
 }
 
+function AbrirPerguntas(i){
+    const pergunta = document.querySelectorAll('.pergunta');
+  
+    pergunta[i].classList.toggle('escondido');
+}
+
 function CriarPerguntas(){
 
     const NomeQuizz = document.querySelector('.NomeQuizz').value;
@@ -48,17 +54,94 @@ function CriarPerguntas(){
     const QtdPerguntasQuizz = document.querySelector('.QtdPerguntasQuizz').value;
     const QtdNivelQuizz = document.querySelector('.QtdNivelQuizz').value;
 
+    if(NomeQuizz.length >= 20 && NomeQuizz.length <=65 && QtdPerguntasQuizz >=3 && QtdNivelQuizz>=2){
 
-    informacaoDoQuizz = [{nome: NomeQuizz , imagem: ImgQuizz, perguntas:QtdPerguntasQuizz, nivel:QtdNivelQuizz}];
+        informacaoDoQuizz = [{nome: NomeQuizz , imagem: ImgQuizz, perguntas:QtdPerguntasQuizz, nivel:QtdNivelQuizz}];
 
+        const pag3_1 = document.querySelector('.pag3_1');
+        const pag3_2 = document.querySelector('.pag3_2');
 
-    const pag3_1 = document.querySelector('.pag3_1');
-    pag3_1.classList.add('escondido');
+        for(let i = 0; i < QtdPerguntasQuizz; i++){
+           if(i === 0){
+            pag3_2.innerHTML +=
+                                ` 
+                                <div class="aba" onclick="AbrirPerguntas(${i})">
+                                    <h1 class="titulo">Pergunta ${i+1}</h1>
+                                    <ion-icon name="create-outline"></ion-icon>
+                                </div>
+                                <div class="containerInputs pergunta">
+                                    <div class="inputs">
+                                        <input type="text" class="input" minlength="20" placeholder="Texto da pergunta">
+                                        <input type="color" value="#FFFFFF" class="input" placeholder="Cor de fundo da pergunta">
+                                    </div>
+                                    <div class="inputs">
+                                        <h1 class="titulo">Resposta correta</h1>
+                                        <input type="text" class="input" minlength="1" placeholder="Resposta correta">
+                                        <input type="url" class="input" placeholder="URL da imagem">
+                                    </div>
+                                    <div class="inputs">
+                                        <h1 class="titulo">Respostas incorretas</h1>
+                                        <input type="text" class="input" placeholder="Resposta incorreta 1">
+                                        <input type="url" class="input" placeholder="URL da imagem 1">
+                                    </div>
+                                    <div class="inputs">
+                                        <input type="text" class="input" placeholder="Resposta incorreta 2">
+                                        <input type="url" class="input" placeholder="URL da imagem 2">
+                                    </div>
+                                    <div class="inputs">
+                                        <input type="text" class="input" placeholder="Resposta incorreta 3">
+                                        <input type="url" class="input" placeholder="URL da imagem 3">
+                                    </div>
+                                </div>
+                                `;
+           }
+           else{
+            pag3_2.innerHTML +=
+                                `
+                                <div class="aba" onclick="AbrirPerguntas(${i})">
+                                    <h1 class="titulo">Pergunta ${i+1}</h1>
+                                    <ion-icon name="create-outline"></ion-icon>
+                                </div>
+                                <div class="containerInputs pergunta escondido">
+                                    <div class="inputs">
+                                        <input type="text" class="input" minlength="20" placeholder="Texto da pergunta">
+                                        <input type="color" value="#FFFFFF" class="input" placeholder="Cor de fundo da pergunta">
+                                    </div>
+                                    <div class="inputs">
+                                        <h1 class="titulo">Resposta correta</h1>
+                                        <input type="text" class="input" minlength="1" placeholder="Resposta correta">
+                                        <input type="url" class="input" placeholder="URL da imagem">
+                                    </div>
+                                    <div class="inputs">
+                                        <h1 class="titulo">Respostas incorretas</h1>
+                                        <input type="text" class="input" placeholder="Resposta incorreta 1">
+                                        <input type="url" class="input" placeholder="URL da imagem 1">
+                                    </div>
+                                    <div class="inputs">
+                                        <input type="text" class="input" placeholder="Resposta incorreta 2">
+                                        <input type="url" class="input" placeholder="URL da imagem 2">
+                                    </div>
+                                    <div class="inputs">
+                                        <input type="text" class="input" placeholder="Resposta incorreta 3">
+                                        <input type="url" class="input" placeholder="URL da imagem 3">
+                                    </div>
+                                </div>
+                                `;
+           }
+        }
+        pag3_2.innerHTML += 
+                        `<div class="BotaoVermelho Tela3_ParaNives" onclick="CriarNives()">Prosseguir pra criar níveis</div>`
 
-    const pag3_2 = document.querySelector('.pag3_2');
-    pag3_2.classList.remove('escondido');
+        pag3_1.classList.add('escondido');
+        pag3_2.classList.remove('escondido');
 
-    console.log(informacaoDoQuizz);
+        console.log(informacaoDoQuizz);
+
+        
+    }
+    else{
+        alert('Confira as informações');
+    }
 }
 
 function CriarNives(){
@@ -81,7 +164,6 @@ function AddQuizz(){
     pag3_4.classList.remove('escondido');
 
     pag3_4.innerHTML += `
-                        
                         <div class="caixaQuizz centralizar">
                             <img class="thumbnailQuizz" src="${informacaoDoQuizz[0]['imagem']}">
                             <span class="tituloQuizz">${informacaoDoQuizz[0]['nome']}</span>
