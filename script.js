@@ -7,21 +7,26 @@ function PuxarQuizz() {
     let promise = axios.get(
       "https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes"
     );
-    promise.then(ExibirQuizz);
+    promise.then(exibirQuizz);
+
 }
 
-function ExibirQuizz(resposta) {
+function exibirQuizz(resposta) {
     let x = resposta.data;
-    let QuizzesPublicos = document.querySelectorAll(".todosQuizzes.containerQuizzes");
-    QuizzesPublicos.innerHTML = "";
+    console.log(resposta.data);
+    let quizzesPublicos = document.querySelector(".listar-quiz");
+    quizzesPublicos.innerHTML = "";
     for (let index = 0; index < x.length; index++) {
-        QuizzesPublicos.innerHTML += `
+       
+
+       quizzesPublicos.innerHTML += `
         <div class="caixaQuizz" onclick="selecionarQuizz(${x[index].id})">
-            <img class="thumbnailQuizz" src="${x[index].image}">
+            <img class="thumbnailQuizz" src="${x[index].image}"/>
             <span class="tituloQuizz">${x[index].title}</span>
             <div class="gradientOverlay"></div>
         </div>
         `;
+       
     }
 }
 
