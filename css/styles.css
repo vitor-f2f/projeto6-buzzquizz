@@ -24,7 +24,9 @@ body {
     z-index: 10;
 }
 
-.paginaInicial {
+/* -----------------------tela1------------------------- */
+
+.tela1 {
     width: 100%;
     max-width: 1051px;
     margin-left: 17px;
@@ -138,6 +140,8 @@ body {
     border-radius: 5px;
     background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
 }
+
+ /* ------------------------------------------------------ */
 
 .tela3{
     display: flex;
