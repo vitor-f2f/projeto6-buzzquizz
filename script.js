@@ -1,6 +1,6 @@
 // oi abigos
 axios.defaults.headers.common['Authorization'] = 'aSaefb8T8sX6LpwwvW21qigP';
-
+let acertos = 0;
 puxarQuizz();
 
 function puxarQuizz() {
@@ -68,7 +68,43 @@ function selecionarQuizz(quizzid) {
     tela2.classList.remove('escondido');
 
 }
+let contador = 0;
 
+function verificar(resposta, verdadeiroOuFalso){
+    let selecionado = document.querySelectorAll(`.container-perguntas.id-${[contador]} .selecionar-questao span`);
+    let desabilitarClick = document.querySelectorAll(`.container-perguntas.id-${[contador]} .selecionar-questao `);
+
+      
+    for(let i = 0; i < desabilitarClick.length; i++){
+        desabilitarClick[i].removeAttribute("onclick");
+        desabilitarClick[i].classList.add('esbranquicado');
+    }
+
+    for(let i = 0; i < selecionado.length; i++){
+        console.log(selecionado[i].dataset.verificar);
+        if(selecionado[i].dataset.verificar === 'true'){
+            selecionado[i].classList.add('acertou');
+        }else{
+            selecionado[i].classList.add('errou');
+        }
+    }
+    
+    //para calcular taxa de acerto depois
+    if(verdadeiroOuFalso){
+        acertos++;
+    }
+    
+    contador++;
+
+    resposta.classList.remove('esbranquicado');
+    console.log(resposta);
+
+}
+
+function selecionar(resposta){
+    resposta.removeAttribute("onclick");
+    resposta.classList.add('selecionado');
+}
 
 function irParaQuizz(resposta) {
 
@@ -97,25 +133,27 @@ function irParaQuizz(resposta) {
         }
 
         sortearRespostas.sort(comparador);
-        console.log(sortearRespostas);
-       
+    
 
         perguntas.innerHTML += `
-            <div class="container-perguntas">
+            <div  onclick="selecionar(this)" class="container-perguntas  id-${[i]}">
                 <div class="titulo-pergunta">${quizSelecionado.questions[i].title}</div>
                 <div class="caixa-questoes">
-                    <div class="selecionar-questao">
+                    <div onclick="verificar(this, ${sortearRespostas[0].isCorrectAnswer})" class="selecionar-questao">
                         <img  src="./img/quizvocesabetudosobrepresentperfect.jpg">
-                        <span >${sortearRespostas[0].text}</span>
-                    </div><div class="selecionar-questao">
+                        <span data-verificar="${sortearRespostas[0].isCorrectAnswer}">${sortearRespostas[0].text}</span>
+                    </div>
+                    <div  onclick="verificar(this, ${sortearRespostas[1].isCorrectAnswer})" class="selecionar-questao">
+                        <img  src="./img/quizvocesabetudosobrepresentperfect.jpg">
+                        <span data-verificar="${sortearRespostas[1].isCorrectAnswer}">${sortearRespostas[1].text}</span>
+                    </div>
+                    <div onclick="verificar(this, ${sortearRespostas[2].isCorrectAnswer})"  class="selecionar-questao">
                         <img src="./img/quizvocesabetudosobrepresentperfect.jpg">
-                        <span >${sortearRespostas[1].text}</span>
-                    </div><div class="selecionar-questao">
+                        <span data-verificar="${sortearRespostas[2].isCorrectAnswer}">${sortearRespostas[2].text}</span>
+                    </div>
+                    <div onclick="verificar(this, ${sortearRespostas[3].isCorrectAnswer})" class="selecionar-questao">
                         <img src="./img/quizvocesabetudosobrepresentperfect.jpg">
-                        <span >${sortearRespostas[2].text}</span>
-                    </div><div class="selecionar-questao">
-                        <img src="./img/quizvocesabetudosobrepresentperfect.jpg">
-                        <span >${sortearRespostas[3].text}</span>
+                        <span data-verificar="${sortearRespostas[3].isCorrectAnswer}">${sortearRespostas[3].text}</span>
                     </div>
             </div>
         `;
