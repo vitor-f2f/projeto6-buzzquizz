@@ -166,7 +166,9 @@ function comparador(){
 //!-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=CRIAÇÃO DO QUIZZ=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 let informacaoDoQuizz =[];
 let perguntas = [];
-let numeroptg
+let nivel = [];
+let numeroptg;
+let numeronivel;
 
 function CriarQuizz(){
     
@@ -175,6 +177,18 @@ function CriarQuizz(){
 
     const tela2 = document.querySelector('.tela2');
     tela2.classList.add('escondido');
+
+    const tela3_1 = document.querySelector('.pag3_1');
+    tela3_1.classList.remove('escondido');
+
+    const tela3_2 = document.querySelector('.pag3_2');
+    tela3_2.classList.add('escondido');
+
+    const tela3_3 = document.querySelector('.pag3_3');
+    tela3_3.classList.add('escondido');
+
+    const tela3_4 = document.querySelector('.pag3_4');
+    tela3_4.classList.add('escondido');
 
     const tela3 = document.querySelector('.tela3');
     tela3.classList.remove('escondido');
@@ -186,6 +200,12 @@ function AbrirPerguntas(i){
   
     pergunta[i].classList.toggle('escondido');
 }
+function AbrirNivel(i){
+    const Nivel = document.querySelectorAll('.nivel');
+  
+    Nivel[i].classList.toggle('escondido');
+}
+
 
 function CriarPerguntas(){
 
@@ -195,6 +215,7 @@ function CriarPerguntas(){
     const QtdNivelQuizz = document.querySelector('.QtdNivelQuizz').value;
 
     numeroptg = QtdPerguntasQuizz;
+    numeronivel = QtdNivelQuizz;
 
     if(NomeQuizz.length >= 20 && NomeQuizz.length <=65 && QtdPerguntasQuizz >=3 && QtdNivelQuizz>=2){
 
@@ -202,6 +223,8 @@ function CriarPerguntas(){
 
         const pag3_1 = document.querySelector('.pag3_1');
         const pag3_2 = document.querySelector('.pag3_2');
+        const pag3_3 = document.querySelector('.pag3_3');
+        const pag3_4 = document.querySelector('.pag3_4');
 
         for(let i = 0; i < QtdPerguntasQuizz; i++){
            if(i === 0){
@@ -271,9 +294,51 @@ function CriarPerguntas(){
                                 `;
            }
         }
+        for(let i = 0; i < QtdNivelQuizz; i++){
+            if(i===0){
+            pag3_3.innerHTML +=
+                               `
+                                <div class="aba" onclick="AbrirNivel(${i})">
+                                    <h1 class="titulo">Nivel ${i+1}</h1>
+                                    <ion-icon name="create-outline"></ion-icon>
+                                </div>
+                                <div class="inputs nivel">                                   
+                                    <input type="text" class="input tituloNivel${i}" minlength="10" placeholder="Título do nível">
+                                    <input type="number" class="input porcentagemNivel${i}" min="0" max="100" placeholder="% de acerto mínima">
+                                    <input type="url" class="input imagemNivel${i}" placeholder="URL da imagem do nível">
+                                    <input type="text" class="input descricaoNivel${i}" minlength="30" placeholder="Descrição do nível">
+                                </div>
+                                `;
+            }
+            else{
+                pag3_3.innerHTML +=
+                               `
+                                <div class="aba" onclick="AbrirNivel(${i})">
+                                    <h1 class="titulo">Nivel ${i+1}</h1>
+                                    <ion-icon name="create-outline"></ion-icon>
+                                </div>
+                                <div class="inputs nivel escondido">                                   
+                                    <input type="text" class="input tituloNivel${i}" minlength="10" placeholder="Título do nível">
+                                    <input type="number" class="input porcentagemNivel${i}" min="0" max="100" placeholder="% de acerto mínima">
+                                    <input type="url" class="input imagemNivel${i}" placeholder="URL da imagem do nível">
+                                    <input type="text" class="input descricaoNivel${i}" minlength="30" placeholder="Descrição do nível">
+                                </div>
+                                `;
+            }
+        }
         pag3_2.innerHTML += 
-                        `<div class="BotaoVermelho Tela3_ParaNives" onclick="CriarNives()">Prosseguir pra criar níveis</div>`
-
+                        `<div class="BotaoVermelho Tela3_ParaNives" onclick="CriarNives()">Prosseguir pra criar níveis</div>`;
+        pag3_3.innerHTML +=
+                        ` <div class="BotaoVermelho Tela3_FinalizarQuizz" onclick="AddQuizz()">Finalizar Quizz</div>`;
+        pag3_4.innerHTML += `
+                        <div class="caixaQuizz centralizar">
+                            <img class="thumbnailQuizz" src="${informacaoDoQuizz[0]['imagem']}">
+                            <span class="tituloQuizz">${informacaoDoQuizz[0]['nome']}</span>
+                            <div class="gradientOverlay"></div>
+                        </div>
+                        <div class="BotaoVermelho Tela3_AcessarQuizz" onclick="jogarQuizz()">Acessar Quizz</div>
+                        <div class="Texto_Cinza Tela3_VoltarHome" onclick="voltarHome()">Voltar pra home</div>
+                        `;
         pag3_1.classList.add('escondido');
         pag3_2.classList.remove('escondido');
 
@@ -284,8 +349,6 @@ function CriarPerguntas(){
 }
 
 function CriarNives(){
-    
-    
         
     let pergunta = document.querySelector(`.pergunta0`).value;
     let cor = document.querySelector(`.cor0`).value;
@@ -341,23 +404,48 @@ function CriarNives(){
 }
 
 function AddQuizz(){
+    for(let c = 0; c < numeronivel; c++){
+        let tituloNivel = document.querySelector(`.tituloNivel${c}`).value;
+        let porcentagemNivel = document.querySelector(`.porcentagemNivel${c}`).value;
+        let imagemNivel = document.querySelector(`.imagemNivel${c}`).value;
+        let descricaoNivel = document.querySelector(`.descricaoNivel${c}`).value;
+        
+        if(tituloNivel.length >= 10 && descricaoNivel.length >= 30){
+            let x =[{
+                    tituloNivel: tituloNivel,
+                    porcentagemNivel: porcentagemNivel,
+                    imagemNivel: imagemNivel,
+                    descricaoNivel:descricaoNivel
+                    }]
+            nivel.push(x);
+        }
+        else{
+            alert('Confia os dados');
+            return;
+        }
+    }
 
-    const pag3_3 = document.querySelector('.pag3_3');
-    pag3_3.classList.add('escondido');
+        const pag3_3 = document.querySelector('.pag3_3');
+        pag3_3.classList.add('escondido');
 
-    const pag3_4 = document.querySelector('.pag3_4');
-    console.log(pag3_4);
-    pag3_4.classList.remove('escondido');
+        const pag3_4 = document.querySelector('.pag3_4');
+        pag3_4.classList.remove('escondido');
 
-    pag3_4.innerHTML += `
-                        <div class="caixaQuizz centralizar">
-                            <img class="thumbnailQuizz" src="${informacaoDoQuizz[0]['imagem']}">
-                            <span class="tituloQuizz">${informacaoDoQuizz[0]['nome']}</span>
-                            <div class="gradientOverlay"></div>
-                        </div>
-                        <div class="BotaoVermelho Tela3_AcessarQuizz">Acessar Quizz</div>
-                        <div class="Texto_Cinza Tela3_VoltarHome">Voltar pra home</div>
-                        `;
+}
+
+function voltarHome(){
+    const tela1 = document.querySelector('.tela1');
+    tela1.classList.remove('escondido');
+
+    const tela2 = document.querySelector('.tela2');
+    tela2.classList.add('escondido');
+
+    const tela3 = document.querySelector('.tela3');
+    tela3.classList.add('escondido');
+}
+
+function jogarQuizz(){
+    //?Função que faz o quizz rodar com o novo quizz como argumento
 }
 
 //!-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=Começar quiz=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
