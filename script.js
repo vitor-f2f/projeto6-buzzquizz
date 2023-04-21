@@ -32,6 +32,8 @@ function exibirQuizz(resposta) {
 
 //!-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=CRIAÇÃO DO QUIZZ=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 let informacaoDoQuizz =[];
+let perguntas = [];
+let numeroptg
 
 function CriarQuizz(){
     
@@ -59,6 +61,8 @@ function CriarPerguntas(){
     const QtdPerguntasQuizz = document.querySelector('.QtdPerguntasQuizz').value;
     const QtdNivelQuizz = document.querySelector('.QtdNivelQuizz').value;
 
+    numeroptg = QtdPerguntasQuizz;
+
     if(NomeQuizz.length >= 20 && NomeQuizz.length <=65 && QtdPerguntasQuizz >=3 && QtdNivelQuizz>=2){
 
         informacaoDoQuizz = [{nome: NomeQuizz , imagem: ImgQuizz, perguntas:QtdPerguntasQuizz, nivel:QtdNivelQuizz}];
@@ -76,59 +80,59 @@ function CriarPerguntas(){
                                 </div>
                                 <div class="containerInputs pergunta">
                                     <div class="inputs">
-                                        <input type="text" class="input" minlength="20" placeholder="Texto da pergunta">
-                                        <input type="color" value="#FFFFFF" class="input" placeholder="Cor de fundo da pergunta">
+                                        <input type="text" class="input pergunta${i}" minlength="20" placeholder="Texto da pergunta">
+                                        <input type="text" value="#FFFFFF" class="input cor${i}" placeholder="Cor de fundo da pergunta">
                                     </div>
                                     <div class="inputs">
                                         <h1 class="titulo">Resposta correta</h1>
-                                        <input type="text" class="input" minlength="1" placeholder="Resposta correta">
-                                        <input type="url" class="input" placeholder="URL da imagem">
+                                        <input type="text" class="input respostaCorreta${i}" minlength="1" placeholder="Resposta correta">
+                                        <input type="url" class="input URLrespostaCorreta${i}" placeholder="URL da imagem">
                                     </div>
                                     <div class="inputs">
                                         <h1 class="titulo">Respostas incorretas</h1>
-                                        <input type="text" class="input" placeholder="Resposta incorreta 1">
-                                        <input type="url" class="input" placeholder="URL da imagem 1">
+                                        <input type="text" class="input respostaIncorreta${i}_1" placeholder="Resposta incorreta 1">
+                                        <input type="url" class="input URLrespostaIncorreta${i}_1" placeholder="URL da imagem 1">
                                     </div>
                                     <div class="inputs">
-                                        <input type="text" class="input" placeholder="Resposta incorreta 2">
-                                        <input type="url" class="input" placeholder="URL da imagem 2">
+                                        <input type="text" class="input respostaIncorreta${i}_2" placeholder="Resposta incorreta 2">
+                                        <input type="url" class="input URLrespostaIncorreta${i}_2" placeholder="URL da imagem 2">
                                     </div>
                                     <div class="inputs">
-                                        <input type="text" class="input" placeholder="Resposta incorreta 3">
-                                        <input type="url" class="input" placeholder="URL da imagem 3">
+                                        <input type="text" class="input respostaIncorreta${i}_3" placeholder="Resposta incorreta 3">
+                                        <input type="url" class="input URLrespostaIncorreta${i}_3" placeholder="URL da imagem 3">
                                     </div>
                                 </div>
                                 `;
            }
            else{
             pag3_2.innerHTML +=
-                                `
+                                ` 
                                 <div class="aba" onclick="AbrirPerguntas(${i})">
                                     <h1 class="titulo">Pergunta ${i+1}</h1>
                                     <ion-icon name="create-outline"></ion-icon>
                                 </div>
                                 <div class="containerInputs pergunta escondido">
                                     <div class="inputs">
-                                        <input type="text" class="input" minlength="20" placeholder="Texto da pergunta">
-                                        <input type="color" value="#FFFFFF" class="input" placeholder="Cor de fundo da pergunta">
+                                        <input type="text" class="input pergunta${i}" minlength="20" placeholder="Texto da pergunta">
+                                        <input type="text" value="#FFFFFF" class="input cor${i}" placeholder="Cor de fundo da pergunta">
                                     </div>
                                     <div class="inputs">
                                         <h1 class="titulo">Resposta correta</h1>
-                                        <input type="text" class="input" minlength="1" placeholder="Resposta correta">
-                                        <input type="url" class="input" placeholder="URL da imagem">
+                                        <input type="text" class="input respostaCorreta${i}" minlength="1" placeholder="Resposta correta">
+                                        <input type="url" class="input URLrespostaCorreta${i}" placeholder="URL da imagem">
                                     </div>
                                     <div class="inputs">
                                         <h1 class="titulo">Respostas incorretas</h1>
-                                        <input type="text" class="input" placeholder="Resposta incorreta 1">
-                                        <input type="url" class="input" placeholder="URL da imagem 1">
+                                        <input type="text" class="input respostaIncorreta${i}_1" placeholder="Resposta incorreta 1">
+                                        <input type="url" class="input URLrespostaIncorreta${i}_1" placeholder="URL da imagem 1">
                                     </div>
                                     <div class="inputs">
-                                        <input type="text" class="input" placeholder="Resposta incorreta 2">
-                                        <input type="url" class="input" placeholder="URL da imagem 2">
+                                        <input type="text" class="input respostaIncorreta${i}_2" placeholder="Resposta incorreta 2">
+                                        <input type="url" class="input URLrespostaIncorreta${i}_2" placeholder="URL da imagem 2">
                                     </div>
                                     <div class="inputs">
-                                        <input type="text" class="input" placeholder="Resposta incorreta 3">
-                                        <input type="url" class="input" placeholder="URL da imagem 3">
+                                        <input type="text" class="input respostaIncorreta${i}_3" placeholder="Resposta incorreta 3">
+                                        <input type="url" class="input URLrespostaIncorreta${i}_3" placeholder="URL da imagem 3">
                                     </div>
                                 </div>
                                 `;
@@ -140,9 +144,6 @@ function CriarPerguntas(){
         pag3_1.classList.add('escondido');
         pag3_2.classList.remove('escondido');
 
-        console.log(informacaoDoQuizz);
-
-        
     }
     else{
         alert('Confira as informações');
@@ -151,11 +152,58 @@ function CriarPerguntas(){
 
 function CriarNives(){
     
-    const pag3_2 = document.querySelector('.pag3_2');
-    pag3_2.classList.add('escondido');
     
-    const pag3_3 = document.querySelector('.pag3_3');
-    pag3_3.classList.remove('escondido');
+        
+    let pergunta = document.querySelector(`.pergunta0`).value;
+    let cor = document.querySelector(`.cor0`).value;
+    let respostaCorreta = document.querySelector(`.respostaCorreta0`).value;
+    let URLrespostaCorreta = document.querySelector(`.URLrespostaCorreta0`).value;
+    let respostaIncorreta_1 = document.querySelector(`.respostaIncorreta0_1`).value
+    let URLrespostaIncorreta_1 = document.querySelector(`.URLrespostaIncorreta0_1`).value;
+    let respostaIncorreta_2 = document.querySelector(`.respostaIncorreta0_2`).value;
+    let URLrespostaIncorreta_2 = document.querySelector(`.URLrespostaIncorreta0_2`);
+    let respostaIncorreta_3 = document.querySelector(`.respostaIncorreta0_3`).value;
+    let URLrespostaIncorreta_3 = document.querySelector(`.URLrespostaIncorreta0_3`).value;
+    
+        if(pergunta.length >= 20 && cor[0]=='#' && respostaCorreta !='' && respostaIncorreta_1 != ''){
+            for(let c =0; c < numeroptg; c++){
+                pergunta = document.querySelector(`.pergunta${c}`).value;
+                cor = document.querySelector(`.cor${c}`).value;
+                respostaCorreta = document.querySelector(`.respostaCorreta${c}`).value;
+                URLrespostaCorreta = document.querySelector(`.URLrespostaCorreta${c}`).value;
+                respostaIncorreta_1 = document.querySelector(`.respostaIncorreta${c}_1`).value
+                URLrespostaIncorreta_1 = document.querySelector(`.URLrespostaIncorreta${c}_1`).value;
+                respostaIncorreta_2 = document.querySelector(`.respostaIncorreta${c}_2`).value;
+                URLrespostaIncorreta_2 = document.querySelector(`.URLrespostaIncorreta${c}_2`).value;
+                respostaIncorreta_3 = document.querySelector(`.respostaIncorreta${c}_3`).value;
+                URLrespostaIncorreta_3 = document.querySelector(`.URLrespostaIncorreta${c}_3`).value;
+                
+                let x = [{  
+                    pergunta: pergunta, 
+                    cor: cor, 
+                    respostaCorreta: respostaCorreta, 
+                    URLrespostaCorreta: URLrespostaCorreta, 
+                    respostaIncorreta_1: respostaIncorreta_1, 
+                    URLrespostaIncorreta_1: URLrespostaIncorreta_1,
+                    respostaIncorreta_2: respostaIncorreta_2, 
+                    URLrespostaIncorreta_2: URLrespostaIncorreta_2, 
+                    respostaIncorreta_3: respostaIncorreta_3, 
+                    URLrespostaIncorreta_3: URLrespostaIncorreta_3
+                }];
+                perguntas.push(x);
+                
+            }
+            console.log(perguntas);
+            const pag3_2 = document.querySelector('.pag3_2');
+                pag3_2.classList.add('escondido');
+                
+                const pag3_3 = document.querySelector('.pag3_3');
+                pag3_3.classList.remove('escondido');
+        }
+        else{
+            alert('Confira os dados');
+            console.log(perguntas);
+        }
     
 }
 
