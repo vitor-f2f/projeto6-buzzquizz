@@ -37,12 +37,12 @@ body {
     align-self: center;
     align-items: center;
     gap: 48px;
+    padding-top: 146px;
 }
 
 .nenhumQuizz {
-    padding-top: 146px;
     width: 100%;
-    min-height: 181px;
+    height: 181px;
     border-radius: 5px;
     border: 1px dashed #d4d4d4;
     display: flex;
@@ -52,7 +52,10 @@ body {
     color: #b9b9b9;
     font-size: 20px;
     line-height: 23px;
-    padding-top: 38px;
+}
+
+.nenhumQuizz p {
+    padding-top: 30px;
 }
 
 .nenhumQuizz button {
@@ -65,10 +68,15 @@ body {
     background-color: inherit;
     margin-top: 24px;
 }
+.nenhumQuizz button:hover {
+    cursor: pointer;
+    background-color: #ec362d;
+    color: white;
+    border: 1px dashed white;
+}
 
 .seusQuizzes {
     width: 100%;
-    padding-top: 138px;
 }
 
 .seusQuizzes ion-icon {

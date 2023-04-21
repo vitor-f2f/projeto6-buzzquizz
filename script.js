@@ -1,9 +1,9 @@
 // oi abigos
 axios.defaults.headers.common['Authorization'] = 'aSaefb8T8sX6LpwwvW21qigP';
 
-PuxarQuizz();
+puxarQuizz();
 
-function PuxarQuizz() {
+function puxarQuizz() {
     let promise = axios.get(
       "https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes"
     );
@@ -12,14 +12,23 @@ function PuxarQuizz() {
 }
 
 function exibirQuizz(resposta) {
+    /* chamar essa função quando terminar de criar um quiz novo
+    para resetar o html da pagina e checar o local storage */
     let x = resposta.data;
     console.log(resposta.data);
-    let quizzesPublicos = document.querySelector(".listar-quiz");
+    let quizzesPublicos = document.querySelector(".todosQuizzes .containerQuizzes");
+    let quizzesDoUsuario = document.querySelector(".seusQuizzes .containerQuizzes");
     quizzesPublicos.innerHTML = "";
+    quizzesDoUsuario.innerHTML = "";
+    let arrayIDs = [];
+    checkLocalStorage(arrayIDs);
     for (let index = 0; index < x.length; index++) {
-       
-
-       quizzesPublicos.innerHTML += `
+        if (arrayIDs.indexOf(x[index].id) !== -1) {
+            ondeRenderizar = quizzesDoUsuario;
+        } else {
+            ondeRenderizar = quizzesPublicos;
+        }
+        ondeRenderizar.innerHTML += `
         <div class="caixaQuizz" onclick="selecionarQuizz(${x[index].id})">
             <img class="thumbnailQuizz" src="${x[index].image}"/>
             <span class="tituloQuizz">${x[index].title}</span>
@@ -29,6 +38,31 @@ function exibirQuizz(resposta) {
        
     }
 }
+
+function checkLocalStorage(arr) {
+    /* checa se existem IDs no localstorage e troca o display
+    de quiz do usuario */
+    let naoTemQuizz = document.querySelector(".nenhumQuizz");
+    let usuarioTemQuizz = document.querySelector(".seusQuizzes");
+    let stringIDsUsuario = localStorage.getItem("id");
+
+    if (stringIDsUsuario === null) {
+        naoTemQuizz.classList.remove("escondido");
+        usuarioTemQuizz.classList.add("escondido");
+    } else {
+        naoTemQuizz.classList.add("escondido");
+        usuarioTemQuizz.classList.remove("escondido");
+        arr = JSON.parse(stringIDsUsuario);
+    }
+    return arr;
+}
+
+function selecionarQuizz(quizzid) {
+    const promise = axios.get(`https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes/${quizzid}`);
+    promise.then(irParaQuizz);
+}
+
+function irParaQuizz() {}
 
 //!-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=CRIAÇÃO DO QUIZZ=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 let informacaoDoQuizz =[];
