@@ -37,6 +37,7 @@ function exibirQuizz(resposta) {
         `;
        
     }
+
 }
 
 function checkLocalStorage(arr) {
@@ -60,10 +61,68 @@ function checkLocalStorage(arr) {
 function selecionarQuizz(quizzid) {
     const promise = axios.get(`https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes/${quizzid}`);
     promise.then(irParaQuizz);
+
+    let tela1 = document.querySelector('.tela1')
+    tela1.classList.add('escondido');
+    let tela2 = document.querySelector('.tela2')
+    tela2.classList.remove('escondido');
+
 }
 
-function irParaQuizz() {}
 
+function irParaQuizz(resposta) {
+    
+    let quizSelecionado = resposta.data;
+
+    let perguntas = document.querySelector('.tela2');
+    perguntas.innerHTML = '';
+    
+    perguntas.innerHTML += `
+    <div class="imagem-cabecalho gradiente-opacity">
+                <img  src="${quizSelecionado.image}">
+                <div class="mascara-cabecalho"></div>
+                <span>${quizSelecionado.title}</span>
+            </div>
+    `;  
+
+    for(let i = 0; i < quizSelecionado.questions.length; i++){
+        
+        let sortearRespostas = [];
+       
+
+        for(let j = 0; j < quizSelecionado.questions[i].answers.length; j++){
+            sortearRespostas.push(quizSelecionado.questions[i].answers[j]);
+        }
+
+        sortearRespostas.sort(comparador);
+        console.log(sortearRespostas);
+       
+
+        perguntas.innerHTML += `
+            <div class="container-perguntas">
+                <div class="titulo-pergunta">${quizSelecionado.questions[i].title}</div>
+                <div class="caixa-questoes">
+                    <div class="selecionar-questao">
+                        <img  src="./img/quizvocesabetudosobrepresentperfect.jpg">
+                        <span >${sortearRespostas[0].text}</span>
+                    </div><div class="selecionar-questao">
+                        <img src="./img/quizvocesabetudosobrepresentperfect.jpg">
+                        <span >${sortearRespostas[1].text}</span>
+                    </div><div class="selecionar-questao">
+                        <img src="./img/quizvocesabetudosobrepresentperfect.jpg">
+                        <span >${sortearRespostas[2].text}</span>
+                    </div><div class="selecionar-questao">
+                        <img src="./img/quizvocesabetudosobrepresentperfect.jpg">
+                        <span >${sortearRespostas[3].text}</span>
+                    </div>
+            </div>
+        `;
+
+    }
+}
+function comparador(){
+    return Math.random() - 0.5;
+}
 //!-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=CRIAÇÃO DO QUIZZ=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 let informacaoDoQuizz =[];
 
@@ -212,3 +271,5 @@ function AddQuizz(){
                         <div class="Texto_Cinza Tela3_VoltarHome">Voltar pra home</div>
                         `;
 }
+
+//!-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=Começar quiz=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

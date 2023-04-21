@@ -155,12 +155,24 @@ body {
  .tela2{
     width: 100%;
  }
- 
+
  .imagem-cabecalho img{
     width: 100%;
     height: 227px;
     object-fit: cover;
     position: relative;
+ }
+
+ .imagem-cabecalho span{
+    color: #FFFFFF;
+    font-size: 39px;
+    font-weight: 400;
+  
+    
+    position: absolute;
+    top: 125px;
+    left: 20%;
+    
  }
  .mascara-cabecalho{
     position: absolute;
