@@ -71,6 +71,8 @@ function selecionarQuizz(quizzid) {
 
 
 function irParaQuizz(resposta) {
+
+    //gera as perguntas em ordem aleatoria escondendo a primeira tela e mostrando a segunda
     
     let quizSelecionado = resposta.data;
 
