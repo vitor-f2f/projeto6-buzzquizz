@@ -1,7 +1,7 @@
 // oi abigos
 axios.defaults.headers.common['Authorization'] = 'aSaefb8T8sX6LpwwvW21qigP';
 let acertos = 0, contador = 0, verificarTamanhoNiveis = 0, percentualAcertos = 0;
-
+let chamarQuizNovamente;
 let quizRetornado;
 
 puxarQuizz();
@@ -70,6 +70,34 @@ function selecionarQuizz(quizzid) {
     let tela2 = document.querySelector('.tela2')
     tela2.classList.remove('escondido');
 
+    chamarQuizNovamente = quizzid;
+
+}
+function reiniciarQuiz(){
+    window.scroll(0, 0)
+    selecionarQuizz(chamarQuizNovamente);
+    acertos = 0;
+    contador = 0;
+    percentualAcertos = 0;
+    verificarTamanhoNiveis = 0;
+
+    let selecionado = document.querySelectorAll(`.container-perguntas. .selecionar-questao span`);
+    let desabilitarClick = document.querySelectorAll(`.container-perguntas. .selecionar-questao `);
+    
+      
+    for(let i = 0; i < desabilitarClick.length; i++){
+        desabilitarClick[i].addAttribute("onclick");
+        desabilitarClick[i].classList.remove('esbranquicado');
+    }
+
+    for(let i = 0; i < selecionado.length; i++){
+        console.log(selecionado[i].dataset.verificar);
+        if(selecionado[i].dataset.verificar === 'true'){
+            selecionado[i].classList.remove('acertou');
+        }else{
+            selecionado[i].classList.remove('errou');
+        }
+    }
 }
 
 function rolagem(){
@@ -99,7 +127,7 @@ function mostrarResultador(){
             <img src="${arrayNivel[0].image}">
             <span>${arrayNivel[0].text}</span>
         </div>
-        <button class="reiniciar">Reiniciar Quizz</button> 
+        <button onclick="reiniciarQuiz()" class="reiniciar">Reiniciar Quizz</button> 
         <span onclick="voltarHome()" class="voltar-home">Voltar para home</span> 
     </div>
 `;
