@@ -373,7 +373,7 @@ function CriarPerguntas(){
                             <span class="tituloQuizz">${informacaoDoQuizz[0]['nome']}</span>
                             <div class="gradientOverlay"></div>
                         </div>
-                        <div class="BotaoVermelho Tela3_AcessarQuizz" data-test="go-quiz" onclick="jogarQuizz()">Acessar Quizz</div>
+                        <div class="BotaoVermelho Tela3_AcessarQuizz centralizar" data-test="go-quiz" onclick="jogarQuizz()">Acessar Quizz</div>
                         <div class="Texto_Cinza Tela3_VoltarHome" data-test="go-home" onclick="voltarHome()">Voltar pra home</div>
                         `;
 
@@ -502,7 +502,7 @@ function addOk(res){
 
 
 function AddQuizz(){
-    
+    let contador = 0;
     for(let c = 0; c < numeronivel; c++){
         let tituloNivel = document.querySelector(`.tituloNivel${c}`).value;
         let porcentagemNivel = document.querySelector(`.porcentagemNivel${c}`).value;
@@ -524,27 +524,39 @@ function AddQuizz(){
             alert('Confira os dados');
             return;
         }
+        if(porcentagemNivel[c] == 0){
+            contador++;
+        }
     }
-    let z = {
-        title:informacaoDoQuizz[0].nome,
-        image:informacaoDoQuizz[0].imagem,
-        questions:questoes,
-        levels:nivel
-    };
+    if(contador === 0){
+        alert("Confira os dados");
+        return;
+    }
+    else if(contador > 1){
+        alert("Confira os dados");
+        return;
+    }
+    else{
+        let z = {
+            title:informacaoDoQuizz[0].nome,
+            image:informacaoDoQuizz[0].imagem,
+            questions:questoes,
+            levels:nivel
+        };
 
-    console.log(z);
-    quizes.push(z);
-    console.log(quizes);
+        console.log(z);
+        quizes.push(z);
+        console.log(quizes);
 
-    let promessa = axios.post('https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes',z);
-    promessa.then(addOk);
+        let promessa = axios.post('https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes',z);
+        promessa.then(addOk);
 
-    const pag3_3 = document.querySelector('.pag3_3');
-    pag3_3.classList.add('escondido');
+        const pag3_3 = document.querySelector('.pag3_3');
+        pag3_3.classList.add('escondido');
 
-    const pag3_4 = document.querySelector('.pag3_4');
-    pag3_4.classList.remove('escondido');
-
+        const pag3_4 = document.querySelector('.pag3_4');
+        pag3_4.classList.remove('escondido');
+    }
 }
 
 function voltarHome(){
