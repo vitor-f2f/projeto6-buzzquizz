@@ -75,11 +75,12 @@ function selecionarQuizz(quizzid) {
 }
 function reiniciarQuiz(){
     window.scroll(0, 0)
-    selecionarQuizz(chamarQuizNovamente);
     acertos = 0;
     contador = 0;
     percentualAcertos = 0;
     verificarTamanhoNiveis = 0;
+    selecionarQuizz(chamarQuizNovamente);
+   
 
     let selecionado = document.querySelectorAll(`.container-perguntas. .selecionar-questao span`);
     let desabilitarClick = document.querySelectorAll(`.container-perguntas. .selecionar-questao `);
