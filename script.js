@@ -310,98 +310,106 @@ function CriarPerguntas(){
            if(i === 0){
             pag3_2.innerHTML +=
                                 ` 
-                                <div class="aba" onclick="AbrirPerguntas(${i})">
-                                    <h1 class="titulo">Pergunta ${i+1}</h1>
-                                    <ion-icon name="create-outline"></ion-icon>
-                                </div>
-                                <div class="containerInputs pergunta">
-                                    <div class="inputs">
-                                        <input type="text" class="input pergunta${i}" minlength="20" placeholder="Texto da pergunta">
-                                        <input type="text" value="#FFFFFF" class="input cor${i}" placeholder="Cor de fundo da pergunta">
+                                <div data-test="question-ctn">
+                                    <div data-test="toggle" class="aba" onclick="AbrirPerguntas(${i})">
+                                        <h1 class="titulo">Pergunta ${i+1}</h1>
+                                        <ion-icon name="create-outline"></ion-icon>
                                     </div>
-                                    <div class="inputs">
-                                        <h1 class="titulo">Resposta correta</h1>
-                                        <input type="text" class="input respostaCorreta${i}" minlength="1" placeholder="Resposta correta">
-                                        <input type="url" class="input URLrespostaCorreta${i}" placeholder="URL da imagem">
-                                    </div>
-                                    <div class="inputs">
-                                        <h1 class="titulo">Respostas incorretas</h1>
-                                        <input type="text" class="input respostaIncorreta${i}_1" placeholder="Resposta incorreta 1">
-                                        <input type="url" class="input URLrespostaIncorreta${i}_1" placeholder="URL da imagem 1">
-                                    </div>
-                                    <div class="inputs">
-                                        <input type="text" class="input respostaIncorreta${i}_2" placeholder="Resposta incorreta 2">
-                                        <input type="url" class="input URLrespostaIncorreta${i}_2" placeholder="URL da imagem 2">
-                                    </div>
-                                    <div class="inputs">
-                                        <input type="text" class="input respostaIncorreta${i}_3" placeholder="Resposta incorreta 3">
-                                        <input type="url" class="input URLrespostaIncorreta${i}_3" placeholder="URL da imagem 3">
+                                    <div class="containerInputs pergunta">
+                                        <div class="inputs">
+                                            <input data-test="question-input" type="text" value="" class="input pergunta${i}" minlength="20" placeholder="Texto da pergunta">
+                                            <input data-test="question-color-input" type="text" class="input cor${i}" placeholder="Cor de fundo da pergunta">
+                                        </div>
+                                        <div class="inputs">
+                                            <h1 class="titulo">Resposta correta</h1>
+                                            <input data-test="correct-answer-input" type="text" value="" class="input respostaCorreta${i}" minlength="1" placeholder="Resposta correta">
+                                            <input data-test="correct-img-input" type="url" value="" class="input URLrespostaCorreta${i}" placeholder="URL da imagem">
+                                        </div>
+                                        <div class="inputs">
+                                            <h1 class="titulo">Respostas incorretas</h1>
+                                            <input data-test="wrong-answer-input" type="text" value="" class="input respostaIncorreta${i}_1" placeholder="Resposta incorreta 1">
+                                            <input data-test="wrong-img-input" type="url" value="" class="input URLrespostaIncorreta${i}_1" placeholder="URL da imagem 1">
+                                        </div>
+                                        <div class="inputs">
+                                            <input data-test="wrong-answer-input" type="text" value="" class="input respostaIncorreta${i}_2" placeholder="Resposta incorreta 2">
+                                            <input data-test="wrong-img-input" type="url" value="" class="input URLrespostaIncorreta${i}_2" placeholder="URL da imagem 2">
+                                        </div>
+                                        <div class="inputs">
+                                            <input data-test="wrong-answer-input" type="text" value="" class="input respostaIncorreta${i}_3" placeholder="Resposta incorreta 3">
+                                            <input data-test="wrong-img-input" type="url" value="" class="input URLrespostaIncorreta${i}_3" placeholder="URL da imagem 3">
+                                        </div>
                                     </div>
                                 </div>
                                 `;
            }
            else{
             pag3_2.innerHTML +=
-                                ` 
-                                <div class="aba" onclick="AbrirPerguntas(${i})">
-                                    <h1 class="titulo">Pergunta ${i+1}</h1>
-                                    <ion-icon name="create-outline"></ion-icon>
-                                </div>
-                                <div class="containerInputs pergunta escondido">
-                                    <div class="inputs">
-                                        <input type="text" class="input pergunta${i}" minlength="20" placeholder="Texto da pergunta">
-                                        <input type="text" value="#FFFFFF" class="input cor${i}" placeholder="Cor de fundo da pergunta">
-                                    </div>
-                                    <div class="inputs">
-                                        <h1 class="titulo">Resposta correta</h1>
-                                        <input type="text" class="input respostaCorreta${i}" minlength="1" placeholder="Resposta correta">
-                                        <input type="url" class="input URLrespostaCorreta${i}" placeholder="URL da imagem">
-                                    </div>
-                                    <div class="inputs">
-                                        <h1 class="titulo">Respostas incorretas</h1>
-                                        <input type="text" class="input respostaIncorreta${i}_1" placeholder="Resposta incorreta 1">
-                                        <input type="url" class="input URLrespostaIncorreta${i}_1" placeholder="URL da imagem 1">
-                                    </div>
-                                    <div class="inputs">
-                                        <input type="text" class="input respostaIncorreta${i}_2" placeholder="Resposta incorreta 2">
-                                        <input type="url" class="input URLrespostaIncorreta${i}_2" placeholder="URL da imagem 2">
-                                    </div>
-                                    <div class="inputs">
-                                        <input type="text" class="input respostaIncorreta${i}_3" placeholder="Resposta incorreta 3">
-                                        <input type="url" class="input URLrespostaIncorreta${i}_3" placeholder="URL da imagem 3">
-                                    </div>
-                                </div>
-                                `;
+            ` 
+            <div data-test="question-ctn">
+                <div data-test="toggle" class="aba" onclick="AbrirPerguntas(${i})">
+                    <h1 class="titulo">Pergunta ${i+1}</h1>
+                    <ion-icon name="create-outline"></ion-icon>
+                </div>
+                <div class="containerInputs pergunta escondido">
+                    <div class="inputs">
+                        <input data-test="question-input" type="text" value="" class="input pergunta${i}" minlength="20" placeholder="Texto da pergunta">
+                        <input data-test="question-color-input" type="text" class="input cor${i}" placeholder="Cor de fundo da pergunta">
+                    </div>
+                    <div class="inputs">
+                        <h1 class="titulo">Resposta correta</h1>
+                        <input data-test="correct-answer-input" type="text" value="" class="input respostaCorreta${i}" minlength="1" placeholder="Resposta correta">
+                        <input data-test="correct-img-input" type="url" value="" class="input URLrespostaCorreta${i}" placeholder="URL da imagem">
+                    </div>
+                    <div class="inputs">
+                        <h1 class="titulo">Respostas incorretas</h1>
+                        <input data-test="wrong-answer-input" type="text" value="" class="input respostaIncorreta${i}_1" placeholder="Resposta incorreta 1">
+                        <input data-test="wrong-img-input" type="url" value="" class="input URLrespostaIncorreta${i}_1" placeholder="URL da imagem 1">
+                    </div>
+                    <div class="inputs">
+                        <input data-test="wrong-answer-input" type="text" value="" class="input respostaIncorreta${i}_2" placeholder="Resposta incorreta 2">
+                        <input data-test="wrong-img-input" type="url" value="" class="input URLrespostaIncorreta${i}_2" placeholder="URL da imagem 2">
+                    </div>
+                    <div class="inputs">
+                        <input data-test="wrong-answer-input" type="text" value="" class="input respostaIncorreta${i}_3" placeholder="Resposta incorreta 3">
+                        <input data-test="wrong-img-input" type="url" value="" class="input URLrespostaIncorreta${i}_3" placeholder="URL da imagem 3">
+                    </div>
+                </div>
+            </div>
+            `;
            }
         }
         for(let i = 0; i < QtdNivelQuizz; i++){
             if(i===0){
             pag3_3.innerHTML +=
-                               `
-                                <div class="aba" onclick="AbrirNivel(${i})">
-                                    <h1 class="titulo">Nivel ${i+1}</h1>
-                                    <ion-icon name="create-outline"></ion-icon>
-                                </div>
-                                <div class="inputs nivel">                                   
-                                    <input type="text" class="input tituloNivel${i}" minlength="10" placeholder="Título do nível">
-                                    <input type="number" class="input porcentagemNivel${i}" min="0" max="100" placeholder="% de acerto mínima">
-                                    <input type="url" class="input imagemNivel${i}" placeholder="URL da imagem do nível">
-                                    <input type="text" class="input descricaoNivel${i}" minlength="30" placeholder="Descrição do nível">
-                                </div>
-                                `;
+            `
+            <div data-test="level-ctn">
+                <div class="aba" onclick="AbrirNivel(${i})" data-test="toggle">
+                    <h1 class="titulo">Nivel ${i+1}</h1>
+                    <ion-icon name="create-outline"></ion-icon>
+                </div>
+                <div class="inputs nivel">                                   
+                    <input data-test="level-input" value="" type="text" class="input tituloNivel${i}" minlength="10" placeholder="Título do nível">
+                    <input data-test="level-percent-input" value="" type="number" class="input porcentagemNivel${i}" min="0" max="100" placeholder="% de acerto mínima">
+                    <input data-test="level-image-input" value="" type="url" class="input imagemNivel${i}" placeholder="URL da imagem do nível">
+                    <input data-test="level-description-input" value="" type="text" class="input descricaoNivel${i}" minlength="30" placeholder="Descrição do nível">
+                </div>
+            </div>
+            `;
             }
             else{
                 pag3_3.innerHTML +=
                                `
-                                <div class="aba" onclick="AbrirNivel(${i})">
-                                    <h1 class="titulo">Nivel ${i+1}</h1>
-                                    <ion-icon name="create-outline"></ion-icon>
-                                </div>
-                                <div class="inputs nivel escondido">                                   
-                                    <input type="text" class="input tituloNivel${i}" minlength="10" placeholder="Título do nível">
-                                    <input type="number" class="input porcentagemNivel${i}" min="0" max="100" placeholder="% de acerto mínima">
-                                    <input type="url" class="input imagemNivel${i}" placeholder="URL da imagem do nível">
-                                    <input type="text" class="input descricaoNivel${i}" minlength="30" placeholder="Descrição do nível">
+                               <div data-test="level-ctn">
+                                    <div class="aba" onclick="AbrirNivel(${i})" data-test="toggle">
+                                        <h1 class="titulo">Nivel ${i+1}</h1>
+                                        <ion-icon name="create-outline"></ion-icon>
+                                    </div>
+                                    <div class="inputs nivel escondido">                                   
+                                        <input data-test="level-input" value="" type="text" class="input tituloNivel${i}" minlength="10" placeholder="Título do nível">
+                                        <input data-test="level-percent-input" value="" type="number" class="input porcentagemNivel${i}" min="0" max="100" placeholder="% de acerto mínima">
+                                        <input data-test="level-image-input" value="" type="url" class="input imagemNivel${i}" placeholder="URL da imagem do nível">
+                                        <input data-test="level-description-input" value="" type="text" class="input descricaoNivel${i}" minlength="30" placeholder="Descrição do nível">
+                                    </div>
                                 </div>
                                 `;
             }
