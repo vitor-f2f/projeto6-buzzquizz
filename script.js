@@ -172,11 +172,11 @@ let quizesStr = "";
 let questoes = [];
 let numeroptg;
 let numeronivel;
-let id = 0;
 let NomeQuizz;
 let ImgQuizz;
 let QtdPerguntasQuizz;
 let QtdNivelQuizz;
+let id;
 
 function CriarQuizz(){
     
@@ -329,7 +329,7 @@ function CriarPerguntas(){
                                 </div>
                                 <div class="inputs nivel">                                   
                                     <input value="" type="text" class="input tituloNivel${i}" minlength="10" placeholder="Título do nível">
-                                    <input value="" type="number" class="input porcentagemNivel${i}" min="0" max="100" placeholder="% de acerto mínima">
+                                    <input value="0" type="number" class="input porcentagemNivel${i}" min="0" max="100" placeholder="% de acerto mínima">
                                     <input value="" type="url" class="input imagemNivel${i}" placeholder="URL da imagem do nível">
                                     <input value="" type="text" class="input descricaoNivel${i}" minlength="30" placeholder="Descrição do nível">
                                 </div>
@@ -388,7 +388,7 @@ function CriarNives(){
     let respostaIncorreta_3 = document.querySelector(`.respostaIncorreta0_3`).value;
     let URLrespostaIncorreta_3 = document.querySelector(`.URLrespostaIncorreta0_3`).value;
     
-        if(pergunta.length >= 20 && cor[0]=='#' && respostaCorreta !='' && respostaIncorreta_1 != '' && hex.includes(cor[1]) > 0 && hex.includes(cor[2]) > 0 && hex.includes(cor[3]) > 0 && hex.includes(cor[4]) > 0 && hex.includes(cor[5]) > 0 && hex.includes(cor[6]) > 0){
+        if(pergunta.length >= 20 && cor[0]=='#' && respostaCorreta !='' && respostaIncorreta_1 != '' && hex.indexOf(cor[1]) > 0 && hex.indexOf(cor[2]) > 0 && hex.indexOf(cor[3]) > 0 && hex.indexOf(cor[4]) > 0 && hex.indexOf(cor[5]) > 0 && hex.indexOf(cor[6]) > 0){
             for(let c =0; c < numeroptg; c++){
                 pergunta = document.querySelector(`.pergunta${c}`).value;
                 cor = document.querySelector(`.cor${c}`).value;
@@ -451,9 +451,9 @@ function CriarNives(){
                     resposta.push(resposta3);
                 }
                 let toSurtando ={
-                                answers:resposta,
                                 title:pergunta,
-                                color:cor
+                                color:cor,
+                                answers:resposta
                                 };
                 questoes.push(toSurtando);
             }
@@ -470,21 +470,28 @@ function CriarNives(){
     
 }
 
+function addOk(res){
+    id = res.data.id;
+    console.log(id);
+    return id;
+}
+
 function AddQuizz(){
     
     for(let c = 0; c < numeronivel; c++){
         let tituloNivel = document.querySelector(`.tituloNivel${c}`).value;
-        let porcentagemNivel =document.querySelector(`.porcentagemNivel${c}`).value;
+        let porcentagemNivel = document.querySelector(`.porcentagemNivel${c}`).value;
         let imagemNivel = document.querySelector(`.imagemNivel${c}`).value;
         let descricaoNivel = document.querySelector(`.descricaoNivel${c}`).value;
         
-        if(tituloNivel.length >= 10 && descricaoNivel.length >= 30 && porcentagemNivel > -1 && porcentagemNivel <101){
+        if(tituloNivel.length >= 10 && descricaoNivel.length >= 30 && porcentagemNivel > -1 && porcentagemNivel < 101){
             let x ={
                     title: tituloNivel,
-                    minValue: porcentagemNivel,
                     image: imagemNivel,
-                    text:descricaoNivel
+                    text:descricaoNivel,
+                    minValue: porcentagemNivel
                     };
+            
             nivel.push(x);
             
         }
@@ -493,20 +500,23 @@ function AddQuizz(){
             return;
         }
     }
-    id++
     let z = {
-        id: id,
+        title:informacaoDoQuizz[0].nome,
         image:informacaoDoQuizz[0].imagem,
-        levels:nivel,
         questions:questoes,
-        title:informacaoDoQuizz[0].nome
+        levels:nivel
     };
 
+    console.log(z);
     quizes.push(z);
     console.log(quizes);
 
     quizesStr = JSON.stringify(quizes);
     localStorage.setItem("id", quizesStr)
+
+    let promessa = axios.post('https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes',z);
+    promessa.then(addOk);
+
     const pag3_3 = document.querySelector('.pag3_3');
     pag3_3.classList.add('escondido');
 
@@ -516,6 +526,7 @@ function AddQuizz(){
 }
 
 function voltarHome(){
+    puxarQuizz();    
     checkLocalStorage(quizesStr);
 
     const tela1 = document.querySelector('.tela1');
@@ -530,6 +541,9 @@ function voltarHome(){
 
 function jogarQuizz(){
     //?Função que faz o quizz rodar com o novo quizz como argumento
+    const tela3 = document.querySelector('.tela3');
+    tela3.classList.add('escondido');
+    selecionarQuizz(id);
 }
 
 //!-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=Começar quiz=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

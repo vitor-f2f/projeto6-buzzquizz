@@ -431,6 +431,9 @@ ion-icon{
 .margintop{
     margin-top: 70px;
 }
+.shadow{
+    height: 69px;
+}
 
 .escondido{
     display: none;
