@@ -82,9 +82,9 @@ function mostrarResultador(){
     let nivel = quizRetornado.levels;
     for(let i = 0; i < nivel.length; i++){
         if(nivel[i].minValue >= percentualAcertos){
-
+            arrayNivel.push(nivel[i]);
         }
-        console.log(nivel[i].minValue);
+        
     }
     
     
@@ -93,11 +93,11 @@ function mostrarResultador(){
     perguntas.innerHTML += `
     <div class="finalizacao-quiz">
         <div class="pontuacao">
-            <span>${percentualAcertos}% de acerto: Você é praticamente um aluno de Hogwarts!</span>
+            <span>${percentualAcertos}% de acerto: ${arrayNivel[0].title}</span>
         </div>
         <div class="cont-descricao">
-            <img src="./img/quizvocesabetudosobrepresentperfect.jpg">
-            <span>Parabéns Potterhead! Bem-vindx a Hogwarts, aproveite o loop infinito de comida e clique no botão abaixo para usar o vira-tempo e reiniciar este teste.</span>
+            <img src="${arrayNivel[0].image}">
+            <span>${arrayNivel[0].text}</span>
         </div>
         <button class="reiniciar">Reiniciar Quizz</button> 
         <span onclick="voltarHome()" class="voltar-home">Voltar para home</span> 
