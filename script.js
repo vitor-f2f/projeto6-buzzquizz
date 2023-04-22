@@ -68,12 +68,16 @@ function selecionarQuizz(quizzid) {
     tela2.classList.remove('escondido');
 
 }
+
+function rolagem(){
+    window.scrollBy(0, 680);
+}
 let contador = 0;
 
 function verificar(resposta, verdadeiroOuFalso){
     let selecionado = document.querySelectorAll(`.container-perguntas.id-${[contador]} .selecionar-questao span`);
     let desabilitarClick = document.querySelectorAll(`.container-perguntas.id-${[contador]} .selecionar-questao `);
-
+    
       
     for(let i = 0; i < desabilitarClick.length; i++){
         desabilitarClick[i].removeAttribute("onclick");
@@ -98,16 +102,21 @@ function verificar(resposta, verdadeiroOuFalso){
 
     resposta.classList.remove('esbranquicado');
     console.log(resposta);
+    
+    
+   
 
 }
 
 function selecionar(resposta){
     resposta.removeAttribute("onclick");
     resposta.classList.add('selecionado');
+    setTimeout(rolagem, 2000);
+    
 }
 
 function irParaQuizz(resposta) {
-
+    window.scroll(0, 0);
     //gera as perguntas em ordem aleatoria escondendo a primeira tela e mostrando a segunda
     
     let quizSelecionado = resposta.data;
@@ -420,7 +429,7 @@ function AddQuizz(){
             nivel.push(x);
         }
         else{
-            alert('Confia os dados');
+            alert('Confira os dados');
             return;
         }
     }
