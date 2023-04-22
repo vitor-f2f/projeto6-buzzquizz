@@ -219,8 +219,15 @@ function comparador(){
 let informacaoDoQuizz =[];
 let perguntas = [];
 let nivel = [];
+let quizes = [];
+let quizesStr = "";
+let questoes = [];
 let numeroptg;
 let numeronivel;
+let NomeQuizz;
+let ImgQuizz;
+let QtdPerguntasQuizz;
+let QtdNivelQuizz;
 
 function CriarQuizz(){
     
@@ -261,31 +268,42 @@ function AbrirNivel(i){
 
 function CriarPerguntas(){
 
-    const NomeQuizz = document.querySelector('.NomeQuizz').value;
-    const ImgQuizz = document.querySelector('.ImgQuizz').value;
-    const QtdPerguntasQuizz = document.querySelector('.QtdPerguntasQuizz').value;
-    const QtdNivelQuizz = document.querySelector('.QtdNivelQuizz').value;
+    NomeQuizz = document.querySelector('.NomeQuizz').value;
+    ImgQuizz = document.querySelector('.ImgQuizz').value;
+    QtdPerguntasQuizz = document.querySelector('.QtdPerguntasQuizz').value;
+    QtdNivelQuizz = document.querySelector('.QtdNivelQuizz').value;
 
     numeroptg = QtdPerguntasQuizz;
     numeronivel = QtdNivelQuizz;
 
     if(NomeQuizz.length >= 20 && NomeQuizz.length <=65 && QtdPerguntasQuizz >=3 && QtdNivelQuizz>=2){
 
-        informacaoDoQuizz = [{nome: NomeQuizz , imagem: ImgQuizz, perguntas:QtdPerguntasQuizz, nivel:QtdNivelQuizz}];
+        informacaoDoQuizz = {nome: NomeQuizz, 
+                             imagem: ImgQuizz, 
+                             perguntas:QtdPerguntasQuizz, 
+                             nivel:QtdNivelQuizz};
 
         const pag3_1 = document.querySelector('.pag3_1');
         const pag3_2 = document.querySelector('.pag3_2');
         const pag3_3 = document.querySelector('.pag3_3');
         const pag3_4 = document.querySelector('.pag3_4');
 
+        pag3_2.innerHTML = "";
+        pag3_3.innerHTML = "";
+        pag3_4.innerHTML = "";
+
+        pag3_2.innerHTML += `<h1 class="titulo margintop">Crie suas perguntas</h1>`;
+        pag3_3.innerHTML += `<h1 class="titulo margintop">Agora, decida os níveis! </h1>`;
+        pag3_4.innerHTML += `<h1 class="titulo margintop">Seu quizz está pronto!</h1>`
+
         for(let i = 0; i < QtdPerguntasQuizz; i++){
            if(i === 0){
             pag3_2.innerHTML +=
                                 ` 
                                 <div data-test="question-ctn">
-                                    <div data-test="toggle" class="aba" onclick="AbrirPerguntas(${i})">
+                                    <div class="aba">
                                         <h1 class="titulo">Pergunta ${i+1}</h1>
-                                        <ion-icon name="create-outline"></ion-icon>
+                                        <ion-icon data-test="toggle" onclick="AbrirPerguntas(${i})" name="create-outline"></ion-icon>
                                     </div>
                                     <div class="containerInputs pergunta">
                                         <div class="inputs">
@@ -392,14 +410,12 @@ function CriarPerguntas(){
                         ` <div class="BotaoVermelho Tela3_FinalizarQuizz" onclick="AddQuizz()">Finalizar Quizz</div>`;
         pag3_4.innerHTML += `
                         <div class="caixaQuizz centralizar">
-                            <img class="thumbnailQuizz" src="${informacaoDoQuizz[0]['imagem']}">
-                            <span class="tituloQuizz">${informacaoDoQuizz[0]['nome']}</span>
+                            <img class="thumbnailQuizz" src="${informacaoDoQuizz.imagem}">
+                            <span class="tituloQuizz">${informacaoDoQuizz.nome}</span>
                             <div class="gradientOverlay"></div>
                         </div>
                         <div class="BotaoVermelho Tela3_AcessarQuizz" onclick="jogarQuizz()">Acessar Quizz</div>
                         <div class="Texto_Cinza Tela3_VoltarHome" onclick="voltarHome()">Voltar pra home</div>
-                        <div class="BotaoVermelho Tela3_AcessarQuizz centralizar" data-test="go-quiz" onclick="jogarQuizz()">Acessar Quizz</div>
-                        <div class="Texto_Cinza Tela3_VoltarHome" data-test="go-home" onclick="voltarHome()">Voltar pra home</div>
                         `;
         pag3_1.classList.add('escondido');
         pag3_2.classList.remove('escondido');
@@ -411,7 +427,8 @@ function CriarPerguntas(){
 }
 
 function CriarNives(){
-        
+    
+    const hex =['a','b','c','d','e','f','A','B','C','D','E','F','0','9','8','7','6','5','4','3','2','1'];
     let pergunta = document.querySelector(`.pergunta0`).value;
     let cor = document.querySelector(`.cor0`).value;
     let respostaCorreta = document.querySelector(`.respostaCorreta0`).value;
@@ -423,7 +440,7 @@ function CriarNives(){
     let respostaIncorreta_3 = document.querySelector(`.respostaIncorreta0_3`).value;
     let URLrespostaIncorreta_3 = document.querySelector(`.URLrespostaIncorreta0_3`).value;
     
-        if(pergunta.length >= 20 && cor[0]=='#' && respostaCorreta !='' && respostaIncorreta_1 != ''){
+    if(pergunta.length >= 20 && cor[0]=='#' && respostaCorreta !='' && respostaIncorreta_1 != '' && hex.indexOf(cor[1]) > 0 && hex.indexOf(cor[2]) > 0 && hex.indexOf(cor[3]) > 0 && hex.indexOf(cor[4]) > 0 && hex.indexOf(cor[5]) > 0 && hex.indexOf(cor[6]) > 0){
             for(let c =0; c < numeroptg; c++){
                 pergunta = document.querySelector(`.pergunta${c}`).value;
                 cor = document.querySelector(`.cor${c}`).value;
@@ -465,6 +482,12 @@ function CriarNives(){
     
 }
 
+function addOk(res){
+    id = res.data.id;
+    console.log(id);
+    return id;
+}
+
 function AddQuizz(){
     let contador = 0;
     for(let c = 0; c < numeronivel; c++){
@@ -491,11 +514,6 @@ function AddQuizz(){
         }
     }
 
-        const pag3_3 = document.querySelector('.pag3_3');
-        pag3_3.classList.add('escondido');
-
-        const pag3_4 = document.querySelector('.pag3_4');
-        pag3_4.classList.remove('escondido');
     if(contador === 0){
         alert("Confira os dados");
         return;
@@ -506,8 +524,8 @@ function AddQuizz(){
     }
     else{
         let z = {
-            title:informacaoDoQuizz[0].nome,
-            image:informacaoDoQuizz[0].imagem,
+            title:informacaoDoQuizz.nome,
+            image:informacaoDoQuizz.imagem,
             questions:questoes,
             levels:nivel
         };
@@ -518,6 +536,9 @@ function AddQuizz(){
 
         let promessa = axios.post('https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes',z);
         promessa.then(addOk);
+        
+        quizesStr = JSON.stringify(quizes);
+        localStorage.setItem("id", quizesStr)
 
         const pag3_3 = document.querySelector('.pag3_3');
         pag3_3.classList.add('escondido');
@@ -530,6 +551,10 @@ function AddQuizz(){
 function voltarHome(){
     window.scroll(0, 0);
     window.location.reload();
+
+    puxarQuizz();    
+    checkLocalStorage(quizesStr);
+
     const tela1 = document.querySelector('.tela1');
     tela1.classList.remove('escondido');
 
@@ -542,6 +567,9 @@ function voltarHome(){
 
 function jogarQuizz(){
     //?Função que faz o quizz rodar com o novo quizz como argumento
+    const tela3 = document.querySelector('.tela3');
+    tela3.classList.add('escondido');
+    selecionarQuizz(id);
 }
 
 //!-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=Começar quiz=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
