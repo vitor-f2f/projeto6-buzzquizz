@@ -187,19 +187,19 @@ function irParaQuizz(resposta) {
                 <div class="titulo-pergunta">${quizSelecionado.questions[i].title}</div>
                 <div class="caixa-questoes">
                     <div onclick="verificar(this, ${sortearRespostas[0].isCorrectAnswer})" class="selecionar-questao">
-                        <img  src="./img/quizvocesabetudosobrepresentperfect.jpg">
+                        <img  src="${sortearRespostas[0].image}">
                         <span data-verificar="${sortearRespostas[0].isCorrectAnswer}">${sortearRespostas[0].text}</span>
                     </div>
                     <div  onclick="verificar(this, ${sortearRespostas[1].isCorrectAnswer})" class="selecionar-questao">
-                        <img  src="./img/quizvocesabetudosobrepresentperfect.jpg">
+                        <img  src="${sortearRespostas[1].image}">
                         <span data-verificar="${sortearRespostas[1].isCorrectAnswer}">${sortearRespostas[1].text}</span>
                     </div>
                     <div onclick="verificar(this, ${sortearRespostas[2].isCorrectAnswer})"  class="selecionar-questao">
-                        <img src="./img/quizvocesabetudosobrepresentperfect.jpg">
+                        <img src="${sortearRespostas[2].image}">
                         <span data-verificar="${sortearRespostas[2].isCorrectAnswer}">${sortearRespostas[2].text}</span>
                     </div>
                     <div onclick="verificar(this, ${sortearRespostas[3].isCorrectAnswer})" class="selecionar-questao">
-                        <img src="./img/quizvocesabetudosobrepresentperfect.jpg">
+                        <img src="${sortearRespostas[3].image}">
                         <span data-verificar="${sortearRespostas[3].isCorrectAnswer}">${sortearRespostas[3].text}</span>
                     </div>
             </div>
@@ -521,6 +521,7 @@ function AddQuizz(){
 
 function voltarHome(){
     window.scroll(0, 0);
+    window.location.reload();
     const tela1 = document.querySelector('.tela1');
     tela1.classList.remove('escondido');
 
