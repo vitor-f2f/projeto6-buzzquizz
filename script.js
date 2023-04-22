@@ -1,8 +1,9 @@
 // oi abigos
 axios.defaults.headers.common['Authorization'] = 'aSaefb8T8sX6LpwwvW21qigP';
-let acertos = 0;
-let contador = 0;
-let verificarTamanhoNiveis = 0;
+let acertos = 0, contador = 0, verificarTamanhoNiveis = 0, percentualAcertos = 0;
+
+let quizRetornado;
+
 puxarQuizz();
 
 function puxarQuizz() {
@@ -75,8 +76,33 @@ function rolagem(){
     window.scrollBy(0, 680);
 }
 function mostrarResultador(){
-    const resultado = document.querySelector('.finalizacao-quiz');
-    resultado.classList.remove('escondido');
+    let arrayNivel = [];
+    percentualAcertos = Math.round((acertos / verificarTamanhoNiveis) * 100);
+
+    let nivel = quizRetornado.levels;
+    for(let i = 0; i < nivel.length; i++){
+        if(nivel[i].minValue >= percentualAcertos){
+
+        }
+        console.log(nivel[i].minValue);
+    }
+    
+    
+    let perguntas = document.querySelector('.tela2');
+    
+    perguntas.innerHTML += `
+    <div class="finalizacao-quiz">
+        <div class="pontuacao">
+            <span>${percentualAcertos}% de acerto: Você é praticamente um aluno de Hogwarts!</span>
+        </div>
+        <div class="cont-descricao">
+            <img src="./img/quizvocesabetudosobrepresentperfect.jpg">
+            <span>Parabéns Potterhead! Bem-vindx a Hogwarts, aproveite o loop infinito de comida e clique no botão abaixo para usar o vira-tempo e reiniciar este teste.</span>
+        </div>
+        <button class="reiniciar">Reiniciar Quizz</button> 
+        <span onclick="voltarHome()" class="voltar-home">Voltar para home</span> 
+    </div>
+`;
 }
 
 function verificar(resposta, verdadeiroOuFalso){
@@ -127,8 +153,11 @@ function selecionar(resposta){
 function irParaQuizz(resposta) {
     window.scroll(0, 0);
     //gera as perguntas em ordem aleatoria escondendo a primeira tela e mostrando a segunda
+    quizRetornado = resposta.data;
     
     let quizSelecionado = resposta.data;
+   
+
 
     let perguntas = document.querySelector('.tela2');
     perguntas.innerHTML = '';
@@ -177,21 +206,9 @@ function irParaQuizz(resposta) {
         `;
 
     }
-    perguntas.innerHTML += `
-    <div class="finalizacao-quiz escondido">
-        <div class="pontuacao">
-            <span>88% de acerto: Você é praticamente um aluno de Hogwarts!</span>
-        </div>
-        <div class="cont-descricao">
-            <img src="./img/quizvocesabetudosobrepresentperfect.jpg">
-            <span>Parabéns Potterhead! Bem-vindx a Hogwarts, aproveite o loop infinito de comida e clique no botão abaixo para usar o vira-tempo e reiniciar este teste.</span>
-        </div>
-        <button class="reiniciar">Reiniciar Quizz</button> 
-        <span class="voltar-home">Voltar para home</span> 
-    </div>
-`;
+   
 
-verificarTamanhoNiveis = quizSelecionado.levels.length;
+verificarTamanhoNiveis = quizSelecionado.questions.length;
 
 }
 
@@ -373,6 +390,8 @@ function CriarPerguntas(){
                         </div>
                         <div class="BotaoVermelho Tela3_AcessarQuizz" onclick="jogarQuizz()">Acessar Quizz</div>
                         <div class="Texto_Cinza Tela3_VoltarHome" onclick="voltarHome()">Voltar pra home</div>
+                        <div class="BotaoVermelho Tela3_AcessarQuizz centralizar" data-test="go-quiz" onclick="jogarQuizz()">Acessar Quizz</div>
+                        <div class="Texto_Cinza Tela3_VoltarHome" data-test="go-home" onclick="voltarHome()">Voltar pra home</div>
                         `;
         pag3_1.classList.add('escondido');
         pag3_2.classList.remove('escondido');
@@ -439,6 +458,7 @@ function CriarNives(){
 }
 
 function AddQuizz(){
+    let contador = 0;
     for(let c = 0; c < numeronivel; c++){
         let tituloNivel = document.querySelector(`.tituloNivel${c}`).value;
         let porcentagemNivel = document.querySelector(`.porcentagemNivel${c}`).value;
@@ -458,6 +478,9 @@ function AddQuizz(){
             alert('Confira os dados');
             return;
         }
+        if(porcentagemNivel[c] == 0){
+            contador++;
+        }
     }
 
         const pag3_3 = document.querySelector('.pag3_3');
@@ -465,10 +488,39 @@ function AddQuizz(){
 
         const pag3_4 = document.querySelector('.pag3_4');
         pag3_4.classList.remove('escondido');
+    if(contador === 0){
+        alert("Confira os dados");
+        return;
+    }
+    else if(contador > 1){
+        alert("Confira os dados");
+        return;
+    }
+    else{
+        let z = {
+            title:informacaoDoQuizz[0].nome,
+            image:informacaoDoQuizz[0].imagem,
+            questions:questoes,
+            levels:nivel
+        };
 
+        console.log(z);
+        quizes.push(z);
+        console.log(quizes);
+
+        let promessa = axios.post('https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes',z);
+        promessa.then(addOk);
+
+        const pag3_3 = document.querySelector('.pag3_3');
+        pag3_3.classList.add('escondido');
+
+        const pag3_4 = document.querySelector('.pag3_4');
+        pag3_4.classList.remove('escondido');
+    }
 }
 
 function voltarHome(){
+    window.scroll(0, 0);
     const tela1 = document.querySelector('.tela1');
     tela1.classList.remove('escondido');
 
