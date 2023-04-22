@@ -1,6 +1,7 @@
 // oi abigos
 axios.defaults.headers.common['Authorization'] = 'aSaefb8T8sX6LpwwvW21qigP';
 let acertos = 0;
+let arrayIDs = [];
 puxarQuizz();
 
 function puxarQuizz() {
@@ -8,30 +9,28 @@ function puxarQuizz() {
       "https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes"
     );
     promise.then(exibirQuizz);
-
 }
 
 function exibirQuizz(resposta) {
     /* chamar essa função quando terminar de criar um quiz novo
     para resetar o html da pagina e checar o local storage */
-    let x = resposta.data;
-    console.log(resposta.data);
+    let listaResp = resposta.data;
     let quizzesPublicos = document.querySelector(".todosQuizzes .containerQuizzes");
     let quizzesDoUsuario = document.querySelector(".seusQuizzes .containerQuizzes");
     quizzesPublicos.innerHTML = "";
     quizzesDoUsuario.innerHTML = "";
-    let arrayIDs = [];
     checkLocalStorage(arrayIDs);
-    for (let index = 0; index < x.length; index++) {
-        if (arrayIDs.indexOf(x[index].id) !== -1) {
+    let listaLocal = localStorage.getItem("arrayIDs");
+    for (let i = 0; i < listaResp.length; i++) {
+        if (listaLocal.includes(listaResp[i].id)) {
             ondeRenderizar = quizzesDoUsuario;
         } else {
             ondeRenderizar = quizzesPublicos;
         }
         ondeRenderizar.innerHTML += `
-        <div class="caixaQuizz" onclick="selecionarQuizz(${x[index].id})">
-            <img class="thumbnailQuizz" src="${x[index].image}"/>
-            <span class="tituloQuizz">${x[index].title}</span>
+        <div class="caixaQuizz" onclick="selecionarQuizz(${listaResp[i].id})">
+            <img class="thumbnailQuizz" src="${listaResp[i].image}"/>
+            <span class="tituloQuizz">${listaResp[i].title}</span>
             <div class="gradientOverlay"></div>
         </div>
         `;
@@ -40,22 +39,21 @@ function exibirQuizz(resposta) {
 
 }
 
-function checkLocalStorage(arr) {
+function checkLocalStorage(arrUser) {
     /* checa se existem IDs no localstorage e troca o display
     de quiz do usuario */
     let naoTemQuizz = document.querySelector(".nenhumQuizz");
     let usuarioTemQuizz = document.querySelector(".seusQuizzes");
-    let stringIDsUsuario = localStorage.getItem("id");
+    arrUser = localStorage.getItem("arrayIDs");
 
-    if (stringIDsUsuario === null) {
+    if (arrUser.length == 0 || arrUser === null) {
         naoTemQuizz.classList.remove("escondido");
         usuarioTemQuizz.classList.add("escondido");
     } else {
         naoTemQuizz.classList.add("escondido");
         usuarioTemQuizz.classList.remove("escondido");
-        arr = JSON.parse(stringIDsUsuario);
     }
-    return arr;
+    return arrUser;
 }
 
 function selecionarQuizz(quizzid) {
@@ -472,9 +470,22 @@ function CriarNives(){
 
 function addOk(res){
     id = res.data.id;
-    console.log(id);
+    if (localStorage.getItem("arrayIDs") !== null) {
+        let listaLocalStr = localStorage.getItem("arrayIDs");
+        let listaLocalArray = JSON.parse(listaLocalStr);
+        listaLocalArray.push(id)
+        listaLocalStr = JSON.stringify(listaLocalArray);
+        localStorage.removeItem("arrayIDs");
+        localStorage.setItem("arrayIDs", listaLocalStr);
+    } else {
+        let idComoArray = [i];
+        idComoArray = JSON.stringify();
+        localStorage.setItem("arrayIDs", idComoArray);
+    }
+
     return id;
 }
+
 
 function AddQuizz(){
     
@@ -496,7 +507,7 @@ function AddQuizz(){
             
         }
         else{
-            alert('Confia os dados');
+            alert('Confira os dados');
             return;
         }
     }
@@ -510,9 +521,6 @@ function AddQuizz(){
     console.log(z);
     quizes.push(z);
     console.log(quizes);
-
-    quizesStr = JSON.stringify(quizes);
-    localStorage.setItem("id", quizesStr)
 
     let promessa = axios.post('https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes',z);
     promessa.then(addOk);
