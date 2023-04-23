@@ -415,7 +415,7 @@ function CriarPerguntas(){
                 <div class="inputs nivel">                                   
                     <input data-test="level-input" value="" type="text" class="input tituloNivel${i}" minlength="10" placeholder="Título do nível">
                     <input data-test="level-percent-input" value="" type="number" class="input porcentagemNivel${i}" min="0" max="100" placeholder="% de acerto mínima">
-                    <input data-test="level-image-input" value="" type="url" class="input imagemNivel${i}" placeholder="URL da imagem do nível">
+                    <input data-test="level-img-input" value="" type="url" class="input imagemNivel${i}" placeholder="URL da imagem do nível">
                     <input data-test="level-description-input" value="" type="text" class="input descricaoNivel${i}" minlength="30" placeholder="Descrição do nível">
                 </div>
             </div>
@@ -432,7 +432,7 @@ function CriarPerguntas(){
                                     <div class="inputs nivel escondido">                                   
                                         <input data-test="level-input" value="" type="text" class="input tituloNivel${i}" minlength="10" placeholder="Título do nível">
                                         <input data-test="level-percent-input" value="" type="number" class="input porcentagemNivel${i}" min="0" max="100" placeholder="% de acerto mínima">
-                                        <input data-test="level-image-input" value="" type="url" class="input imagemNivel${i}" placeholder="URL da imagem do nível">
+                                        <input data-test="level-img-input" value="" type="url" class="input imagemNivel${i}" placeholder="URL da imagem do nível">
                                         <input data-test="level-description-input" value="" type="text" class="input descricaoNivel${i}" minlength="30" placeholder="Descrição do nível">
                                     </div>
                                 </div>
