@@ -32,7 +32,7 @@ function exibirQuizz(resposta) {
             quizzesDoUsuario.innerHTML += `
             <div class="caixaQuizz" data-test="my-quiz" onclick="selecionarQuizz(${listaResp[i].id})">
                 <img class="thumbnailQuizz" src="${listaResp[i].image}"/>
-                <span class="tituloQuizz">${listaResp[i].title}</span>
+                <p class="tituloQuizz">${listaResp[i].title}</p>
                 <div class="gradientOverlay"></div>
             </div>
             `;
@@ -40,7 +40,7 @@ function exibirQuizz(resposta) {
             quizzesPublicos.innerHTML += `
             <div class="caixaQuizz" onclick="selecionarQuizz(${listaResp[i].id})">
                 <img class="thumbnailQuizz" src="${listaResp[i].image}"/>
-                <span class="tituloQuizz">${listaResp[i].title}</span>
+                <p class="tituloQuizz">${listaResp[i].title}</p>
                 <div class="gradientOverlay"></div>
             </div>
             `;
@@ -462,7 +462,6 @@ function CriarPerguntas(){
 }
 
 function CriarNives(){
-    
     const hex =['a','b','c','d','e','f','A','B','C','D','E','F','0','9','8','7','6','5','4','3','2','1'];
     let pergunta = document.querySelector(`.pergunta0`).value;
     let cor = document.querySelector(`.cor0`).value;
@@ -538,6 +537,20 @@ function addOk(res){
 
 function AddQuizz(){
     let contador = 0;
+    let temZero = 0;
+    for (let i = 0; i < numeronivel; i++) {
+        let tituloNivel = document.querySelector(`.tituloNivel${i}`).value;
+        let porcentagemNivel = document.querySelector(`.porcentagemNivel${i}`).value;
+        let imagemNivel = document.querySelector(`.imagemNivel${i}`).value;
+        let descricaoNivel = document.querySelector(`.descricaoNivel${i}`).value;
+        if (porcentagemNivel == 0) {
+            temZero = 1;
+        }
+        if (tituloNivel.length < 10 || !imagemValida(imagemNivel) || descricaoNivel.legnth < 30 || temZero == 0 || porcentagemNivel < 0 || porcentagemNivel > 100) {
+            alert('Confira os dados');
+            return;
+        }
+    }
     for(let c = 0; c < numeronivel; c++){
         let tituloNivel = document.querySelector(`.tituloNivel${c}`).value;
         let porcentagemNivel = document.querySelector(`.porcentagemNivel${c}`).value;
@@ -600,8 +613,7 @@ function voltarHome(){
     window.scroll(0, 0);
     window.location.reload();
 
-    puxarQuizz();    
-    checkLocalStorage(quizesStr);
+    puxarQuizz();
 
     const tela1 = document.querySelector('.tela1');
     tela1.classList.remove('escondido');
