@@ -38,7 +38,7 @@ function exibirQuizz(resposta) {
             `;
         } else {
             quizzesPublicos.innerHTML += `
-            <div class="caixaQuizz" onclick="selecionarQuizz(${listaResp[i].id})">
+            <div class="caixaQuizz" data-test="others-quiz" onclick="selecionarQuizz(${listaResp[i].id})">
                 <img class="thumbnailQuizz" src="${listaResp[i].image}"/>
                 <p class="tituloQuizz">${listaResp[i].title}</p>
                 <div class="gradientOverlay"></div>
@@ -444,7 +444,7 @@ function CriarPerguntas(){
         pag3_3.innerHTML +=
                         ` <div class="BotaoVermelho Tela3_FinalizarQuizz" data-test="finish" onclick="AddQuizz()">Finalizar Quizz</div>`;
         pag3_4.innerHTML += `
-                        <div class="caixaQuizz centralizar">
+                        <div data-test="success-banner" class="caixaQuizz centralizar">
                             <img class="thumbnailQuizz" src="${informacaoDoQuizz.imagem}">
                             <span class="tituloQuizz">${informacaoDoQuizz.nome}</span>
                             <div class="gradientOverlay"></div>
