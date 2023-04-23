@@ -4,6 +4,7 @@ let acertos = 0, contador = 0, verificarTamanhoNiveis = 0, percentualAcertos = 0
 let chamarQuizNovamente;
 let quizRetornado;
 let arrayIDs = [];
+let respostaAPI = [];
 
 puxarQuizz();
 
@@ -23,10 +24,11 @@ function exibirQuizz(resposta) {
     let quizzesDoUsuario = document.querySelector(".seusQuizzes .containerQuizzes");
     quizzesPublicos.innerHTML = "";
     quizzesDoUsuario.innerHTML = "";
-    checkLocalStorage(arrayIDs);
     let listaLocal = localStorage.getItem("arrayIDs");
+    let countUsuario = 0;
     for (let i = 0; i < listaResp.length; i++) {
         if (listaLocal.includes(listaResp[i].id)) {
+            countUsuario++;
             quizzesDoUsuario.innerHTML += `
             <div class="caixaQuizz" data-test="my-quiz" onclick="selecionarQuizz(${listaResp[i].id})">
                 <img class="thumbnailQuizz" src="${listaResp[i].image}"/>
@@ -36,7 +38,7 @@ function exibirQuizz(resposta) {
             `;
         } else {
             quizzesPublicos.innerHTML += `
-            <div class="caixaQuizz" data-test="others-quiz" onclick="selecionarQuizz(${listaResp[i].id})">
+            <div class="caixaQuizz" onclick="selecionarQuizz(${listaResp[i].id})">
                 <img class="thumbnailQuizz" src="${listaResp[i].image}"/>
                 <span class="tituloQuizz">${listaResp[i].title}</span>
                 <div class="gradientOverlay"></div>
@@ -44,22 +46,15 @@ function exibirQuizz(resposta) {
             `;
         }
     }
-}
-
-function checkLocalStorage(arrUser) {
-    /* checa se existem IDs no localstorage e troca o display
-    de quiz do usuario */
     let naoTemQuizz = document.querySelector(".nenhumQuizz");
     let usuarioTemQuizz = document.querySelector(".seusQuizzes");
-    arrUser = localStorage.getItem("arrayIDs");
-    if (arrUser.length == 0 || arrUser === null) {
-        naoTemQuizz.classList.remove("escondido");
-        usuarioTemQuizz.classList.add("escondido");
-    } else {
+    if (countUsuario > 0) {
         naoTemQuizz.classList.add("escondido");
         usuarioTemQuizz.classList.remove("escondido");
+    } else {
+        naoTemQuizz.classList.remove("escondido");
+        usuarioTemQuizz.classList.add("escondido");
     }
-    return arrUser;
 }
 
 function selecionarQuizz(quizzid) {
@@ -514,17 +509,17 @@ function CriarNives(){
 
 function addOk(res){
     id = res.data.id;
-    if (localStorage.getItem("arrayIDs") !== null) {
-        let listaLocalStr = localStorage.getItem("arrayIDs");
+    if (localStorage.getItem("arrayLocal") !== null) {
+        let listaLocalStr = localStorage.getItem("arrayLocal");
         let listaLocalArray = JSON.parse(listaLocalStr);
-        listaLocalArray.push(id)
+        listaLocalArray.push(id);
         listaLocalStr = JSON.stringify(listaLocalArray);
-        localStorage.removeItem("arrayIDs");
-        localStorage.setItem("arrayIDs", listaLocalStr);
+        localStorage.removeItem("arrayLocal");
+        localStorage.setItem("arrayLocal", listaLocalStr);
     } else {
         let idComoArray = [i];
         idComoArray = JSON.stringify();
-        localStorage.setItem("arrayIDs", idComoArray);
+        localStorage.setItem("arrayLocal", idComoArray);
     }
 
     return id;
