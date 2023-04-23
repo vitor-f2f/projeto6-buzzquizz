@@ -408,9 +408,9 @@ function CriarPerguntas(){
             pag3_3.innerHTML +=
             `
             <div data-test="level-ctn">
-                <div class="aba" onclick="AbrirNivel(${i})" data-test="toggle">
+                <div class="aba">
                     <h1 class="titulo">Nivel ${i+1}</h1>
-                    <ion-icon name="create-outline"></ion-icon>
+                    <ion-icon onclick="AbrirNivel(${i})" data-test="toggle" name="create-outline"></ion-icon>
                 </div>
                 <div class="inputs nivel">                                   
                     <input data-test="level-input" value="" type="text" class="input tituloNivel${i}" minlength="10" placeholder="Título do nível">
@@ -425,9 +425,9 @@ function CriarPerguntas(){
                 pag3_3.innerHTML +=
                                `
                                <div data-test="level-ctn">
-                                    <div class="aba" onclick="AbrirNivel(${i})" data-test="toggle">
+                                    <div class="aba">
                                         <h1 class="titulo">Nivel ${i+1}</h1>
-                                        <ion-icon name="create-outline"></ion-icon>
+                                        <ion-icon onclick="AbrirNivel(${i})" data-test="toggle" name="create-outline"></ion-icon>
                                     </div>
                                     <div class="inputs nivel escondido">                                   
                                         <input data-test="level-input" value="" type="text" class="input tituloNivel${i}" minlength="10" placeholder="Título do nível">
