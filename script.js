@@ -5,6 +5,7 @@ let chamarQuizNovamente;
 let quizRetornado;
 let arrayIDs = [];
 let respostaAPI = [];
+console.log(arrayIDs);
 
 puxarQuizz();
 
@@ -26,17 +27,20 @@ function exibirQuizz(resposta) {
     quizzesDoUsuario.innerHTML = "";
     let listaLocal = localStorage.getItem("arrayIDs");
     let countUsuario = 0;
+
     for (let i = 0; i < listaResp.length; i++) {
-        if (listaLocal.includes(listaResp[i].id)) {
-            countUsuario++;
-            quizzesDoUsuario.innerHTML += `
-            <div class="caixaQuizz" data-test="my-quiz" onclick="selecionarQuizz(${listaResp[i].id})">
-                <img class="thumbnailQuizz" src="${listaResp[i].image}"/>
-                <p class="tituloQuizz">${listaResp[i].title}</p>
-                <div class="gradientOverlay"></div>
-            </div>
-            `;
-        } else {
+        if(listaLocal !== null){
+            if(listaLocal.includes(listaResp[i].id)){
+                countUsuario++;
+                quizzesDoUsuario.innerHTML += `
+                <div class="caixaQuizz" data-test="my-quiz" onclick="selecionarQuizz(${listaResp[i].id})">
+                    <img class="thumbnailQuizz" src="${listaResp[i].image}"/>
+                    <p class="tituloQuizz">${listaResp[i].title}</p>
+                    <div class="gradientOverlay"></div>
+                </div>
+                `;
+            }
+        }else {
             quizzesPublicos.innerHTML += `
             <div class="caixaQuizz" data-test="others-quiz" onclick="selecionarQuizz(${listaResp[i].id})">
                 <img class="thumbnailQuizz" src="${listaResp[i].image}"/>
@@ -45,6 +49,7 @@ function exibirQuizz(resposta) {
             </div>
             `;
         }
+      
     }
     let naoTemQuizz = document.querySelector(".nenhumQuizz");
     let usuarioTemQuizz = document.querySelector(".seusQuizzes");
