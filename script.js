@@ -311,7 +311,7 @@ function CriarPerguntas(){
     numeroptg = QtdPerguntasQuizz;
     numeronivel = QtdNivelQuizz;
 
-    if(NomeQuizz.length >= 20 && NomeQuizz.length <=65 && QtdPerguntasQuizz >=3 && QtdNivelQuizz>=2 && imagemValida(ImgQuizz)){
+    if(NomeQuizz.length >= 20 && NomeQuizz.length <= 65 && QtdPerguntasQuizz >=3 && QtdNivelQuizz>=2 && imagemValida(ImgQuizz)){
 
         informacaoDoQuizz = {nome: NomeQuizz, 
                              imagem: ImgQuizz, 
