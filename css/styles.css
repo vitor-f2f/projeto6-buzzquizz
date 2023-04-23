@@ -37,8 +37,7 @@ body {
 .tela1 {
     width: 100%;
     max-width: 1084px;
-    padding-left: 17px;
-    padding-right: 17px;
+    margin: 0 17px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -113,7 +112,6 @@ body {
 
 .containerQuizzes {
     width: 100%;
-    min-height: 181px;
     display: flex;
     flex-wrap: wrap;
     color: #b9b9b9;
@@ -129,17 +127,19 @@ body {
     flex-direction: column;
     border-radius: 5px;
     cursor: pointer;
+    overflow: hidden;
 }
 
 .tituloQuizz {
     color: white;
     font-size: 19px;
     font-weight: 400;
+    max-width: 330px;
     height: 54px;
     position: relative;
     top: -40px;
     left: 10px;
-    z-index: 2;
+    z-index: 3;
 }
 
 .thumbnailQuizz {
@@ -151,8 +151,9 @@ body {
 
 .gradientOverlay {
     position: absolute;
-    height: 181px;
-    width: 340px;
+    z-index: 2;
+    width: inherit;
+    height: inherit;
     border-radius: 5px;
     background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
 }
