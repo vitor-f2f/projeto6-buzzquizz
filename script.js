@@ -501,6 +501,46 @@ function CriarNives(){
                     URLrespostaIncorreta_3: URLrespostaIncorreta_3
                 }];
                 perguntas.push(x);
+
+                let resposta0 = {
+                                text:respostaCorreta,
+                                image:URLrespostaCorreta,
+                                isCorrectAnswer:true
+                                };
+
+                let resposta1 = {
+                                text:respostaIncorreta_1,
+                                image:URLrespostaIncorreta_1,
+                                isCorrectAnswer:false
+                                };
+                
+                let resposta2 = {
+                                text:respostaIncorreta_2,
+                                image:URLrespostaIncorreta_2,
+                                isCorrectAnswer:false
+                                };
+                let resposta3 = {
+                                text:respostaIncorreta_3,
+                                image:URLrespostaIncorreta_3,
+                                isCorrectAnswer:false
+                                };
+                let resposta = [];
+
+                resposta.push(resposta0);
+                resposta.push(resposta1);
+
+                if(resposta2.text != ""){
+                    resposta.push(resposta2);
+                }
+                if(resposta3.text != ""){
+                    resposta.push(resposta3);
+                }
+                let toSurtando ={
+                                title:pergunta,
+                                color:cor,
+                                answers:resposta
+                                };
+                questoes.push(toSurtando);
                 
             }
             console.log(perguntas);
@@ -558,12 +598,13 @@ function AddQuizz(){
         let descricaoNivel = document.querySelector(`.descricaoNivel${c}`).value;
         
         if(tituloNivel.length >= 10 && descricaoNivel.length >= 30){
-            let x =[{
-                    tituloNivel: tituloNivel,
-                    porcentagemNivel: porcentagemNivel,
-                    imagemNivel: imagemNivel,
-                    descricaoNivel:descricaoNivel
-                    }]
+            let x ={
+                    title: tituloNivel,
+                    image: imagemNivel,
+                    text:descricaoNivel,
+                    minValue: porcentagemNivel
+                    }
+
             nivel.push(x);
         }
         else{
