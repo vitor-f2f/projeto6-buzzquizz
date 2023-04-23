@@ -371,9 +371,9 @@ function CriarPerguntas(){
             pag3_2.innerHTML +=
             ` 
             <div data-test="question-ctn">
-                <div data-test="toggle" class="aba" onclick="AbrirPerguntas(${i})">
+                <div class="aba">
                     <h1 class="titulo">Pergunta ${i+1}</h1>
-                    <ion-icon name="create-outline"></ion-icon>
+                    <ion-icon data-test="toggle" onclick="AbrirPerguntas(${i})" name="create-outline"></ion-icon>
                 </div>
                 <div class="containerInputs pergunta escondido">
                     <div class="inputs">
