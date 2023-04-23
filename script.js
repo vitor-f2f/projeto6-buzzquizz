@@ -123,14 +123,14 @@ function mostrarResultador(){
     perguntas.innerHTML += `
     <div class="finalizacao-quiz">
         <div class="pontuacao">
-            <span>${percentualAcertos}% de acerto: ${arrayNivel[0].title}</span>
+            <span data-test="level-title">${percentualAcertos}% de acerto: ${arrayNivel[0].title}</span>
         </div>
         <div class="cont-descricao">
-            <img src="${arrayNivel[0].image}">
-            <span>${arrayNivel[0].text}</span>
+            <img data-test="level-img" src="${arrayNivel[0].image}">
+            <span data-test="level-text">${arrayNivel[0].text}</span>
         </div>
-        <button onclick="reiniciarQuiz()" class="reiniciar">Reiniciar Quizz</button> 
-        <span onclick="voltarHome()" class="voltar-home">Voltar para home</span> 
+        <button data-test="restart" onclick="reiniciarQuiz()" class="reiniciar">Reiniciar Quizz</button> 
+        <span data-test="go-home" onclick="voltarHome()" class="voltar-home">Voltar para home</span> 
     </div>
 `;
 }
@@ -193,7 +193,7 @@ function irParaQuizz(resposta) {
     perguntas.innerHTML = '';
     
     perguntas.innerHTML += `
-    <div class="imagem-cabecalho gradiente-opacity">
+    <div data-test="banner"  class="imagem-cabecalho gradiente-opacity">
                 <img  src="${quizSelecionado.image}">
                 <div class="mascara-cabecalho"></div>
                 <span>${quizSelecionado.title}</span>
@@ -214,23 +214,23 @@ function irParaQuizz(resposta) {
 
         perguntas.innerHTML += `
             <div  onclick="selecionar(this)" class="container-perguntas  id-${[i]}">
-                <div class="titulo-pergunta">${quizSelecionado.questions[i].title}</div>
+                <div data-test="question"  class="titulo-pergunta">${quizSelecionado.questions[i].title}</div>
                 <div class="caixa-questoes">
-                    <div onclick="verificar(this, ${sortearRespostas[0].isCorrectAnswer})" class="selecionar-questao">
+                    <div data-test="answer" onclick="verificar(this, ${sortearRespostas[0].isCorrectAnswer})" class="selecionar-questao">
                         <img  src="${sortearRespostas[0].image}">
-                        <span data-verificar="${sortearRespostas[0].isCorrectAnswer}">${sortearRespostas[0].text}</span>
+                        <span data-test="answer-text" data-verificar="${sortearRespostas[0].isCorrectAnswer}">${sortearRespostas[0].text}</span>
                     </div>
-                    <div  onclick="verificar(this, ${sortearRespostas[1].isCorrectAnswer})" class="selecionar-questao">
+                    <div  data-test="answer" onclick="verificar(this, ${sortearRespostas[1].isCorrectAnswer})" class="selecionar-questao">
                         <img  src="${sortearRespostas[1].image}">
-                        <span data-verificar="${sortearRespostas[1].isCorrectAnswer}">${sortearRespostas[1].text}</span>
+                        <span data-test="answer-text" data-verificar="${sortearRespostas[1].isCorrectAnswer}">${sortearRespostas[1].text}</span>
                     </div>
-                    <div onclick="verificar(this, ${sortearRespostas[2].isCorrectAnswer})"  class="selecionar-questao">
+                    <div data-test="answer" onclick="verificar(this, ${sortearRespostas[2].isCorrectAnswer})"  class="selecionar-questao">
                         <img src="${sortearRespostas[2].image}">
-                        <span data-verificar="${sortearRespostas[2].isCorrectAnswer}">${sortearRespostas[2].text}</span>
+                        <span data-test="answer-text" data-verificar="${sortearRespostas[2].isCorrectAnswer}">${sortearRespostas[2].text}</span>
                     </div>
-                    <div onclick="verificar(this, ${sortearRespostas[3].isCorrectAnswer})" class="selecionar-questao">
+                    <div data-test="answer" onclick="verificar(this, ${sortearRespostas[3].isCorrectAnswer})" class="selecionar-questao">
                         <img src="${sortearRespostas[3].image}">
-                        <span data-verificar="${sortearRespostas[3].isCorrectAnswer}">${sortearRespostas[3].text}</span>
+                        <span data-test="answer-text" data-verificar="${sortearRespostas[3].isCorrectAnswer}">${sortearRespostas[3].text}</span>
                     </div>
             </div>
         `;
