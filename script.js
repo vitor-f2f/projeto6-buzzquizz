@@ -290,6 +290,16 @@ function AbrirNivel(i){
     Nivel[i].classList.toggle('escondido');
 }
 
+function imagemValida(imagem) {
+    let url;
+    try {
+        url = new URL(imagem);
+    } catch (_) {
+        return false;
+    }
+    return url.protocol === "http:" || url.protocol === "https:";
+}
+
 
 function CriarPerguntas(){
 
@@ -301,7 +311,7 @@ function CriarPerguntas(){
     numeroptg = QtdPerguntasQuizz;
     numeronivel = QtdNivelQuizz;
 
-    if(NomeQuizz.length >= 20 && NomeQuizz.length <=65 && QtdPerguntasQuizz >=3 && QtdNivelQuizz>=2){
+    if(NomeQuizz.length >= 20 && NomeQuizz.length <=65 && QtdPerguntasQuizz >=3 && QtdNivelQuizz>=2 && imagemValida(ImgQuizz)){
 
         informacaoDoQuizz = {nome: NomeQuizz, 
                              imagem: ImgQuizz, 
@@ -430,9 +440,9 @@ function CriarPerguntas(){
             }
         }
         pag3_2.innerHTML += 
-                        `<div class="BotaoVermelho Tela3_ParaNives" onclick="CriarNives()">Prosseguir pra criar níveis</div>`;
+                        `<div class="BotaoVermelho Tela3_ParaNives" data-test="go-create-levels" onclick="CriarNives()">Prosseguir pra criar níveis</div>`;
         pag3_3.innerHTML +=
-                        ` <div class="BotaoVermelho Tela3_FinalizarQuizz" onclick="AddQuizz()">Finalizar Quizz</div>`;
+                        ` <div class="BotaoVermelho Tela3_FinalizarQuizz" data-test="finish" onclick="AddQuizz()">Finalizar Quizz</div>`;
         pag3_4.innerHTML += `
                         <div class="caixaQuizz centralizar">
                             <img class="thumbnailQuizz" src="${informacaoDoQuizz.imagem}">
@@ -465,7 +475,8 @@ function CriarNives(){
     let respostaIncorreta_3 = document.querySelector(`.respostaIncorreta0_3`).value;
     let URLrespostaIncorreta_3 = document.querySelector(`.URLrespostaIncorreta0_3`).value;
     
-    if(pergunta.length >= 20 && cor[0]=='#' && respostaCorreta !='' && respostaIncorreta_1 != '' && hex.indexOf(cor[1]) > 0 && hex.indexOf(cor[2]) > 0 && hex.indexOf(cor[3]) > 0 && hex.indexOf(cor[4]) > 0 && hex.indexOf(cor[5]) > 0 && hex.indexOf(cor[6]) > 0){
+    if(pergunta.length >= 20 && cor[0]=='#' && respostaCorreta !='' && respostaIncorreta_1 != '' && hex.indexOf(cor[1]) > 0 && 
+    hex.indexOf(cor[2]) > 0 && hex.indexOf(cor[3]) > 0 && hex.indexOf(cor[4]) > 0 && hex.indexOf(cor[5]) > 0 && hex.indexOf(cor[6]) > 0){
             for(let c =0; c < numeroptg; c++){
                 pergunta = document.querySelector(`.pergunta${c}`).value;
                 cor = document.querySelector(`.cor${c}`).value;
