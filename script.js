@@ -214,8 +214,9 @@ function irParaQuizz(resposta) {
     
 
         perguntas.innerHTML += `
-            <div  data-test="question" onclick="selecionar(this)" class="container-perguntas  id-${[i]}">
-                <div  class="titulo-pergunta">${quizSelecionado.questions[i].title}</div>
+            
+            <div data-test="question" onclick="selecionar(this)" class="container-perguntas  id-${[i]}">
+                <div data-test="question-title" class="titulo-pergunta">${quizSelecionado.questions[i].title}</div>
                 <div class="caixa-questoes">
                     <div data-test="answer" onclick="verificar(this, ${sortearRespostas[0].isCorrectAnswer})" class="selecionar-questao">
                         <img  src="${sortearRespostas[0].image}">
@@ -573,7 +574,7 @@ function addOk(res){
         localStorage.removeItem("arrayLocal");
         localStorage.setItem("arrayLocal", listaLocalStr);
     } else {
-        let idComoArray = [i];
+        let idComoArray = [id];
         idComoArray = JSON.stringify();
         localStorage.setItem("arrayLocal", idComoArray);
     }
@@ -589,7 +590,7 @@ function AddQuizz(){
         let porcentagemNivel = document.querySelector(`.porcentagemNivel${i}`).value;
         let imagemNivel = document.querySelector(`.imagemNivel${i}`).value;
         let descricaoNivel = document.querySelector(`.descricaoNivel${i}`).value;
-        if (porcentagemNivel == 0) {
+        if (porcentagemNivel[i] == 0) {
             temZero = 1;
         }
         if (tituloNivel.length < 10 || !imagemValida(imagemNivel) || descricaoNivel.legnth < 30 || temZero == 0 || porcentagemNivel < 0 || porcentagemNivel > 100) {
