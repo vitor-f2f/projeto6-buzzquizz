@@ -606,26 +606,26 @@ function CriarNives() {
             perguntas.push(x);
 
             let resposta0 = {
-                text: respostaCorreta,
-                image: URLrespostaCorreta,
-                isCorrectAnswer: true,
+                "text": respostaCorreta,
+                "image": URLrespostaCorreta,
+                "isCorrectAnswer": true,
             };
 
             let resposta1 = {
-                text: respostaIncorreta_1,
-                image: URLrespostaIncorreta_1,
-                isCorrectAnswer: false,
+                "text": respostaIncorreta_1,
+                "image": URLrespostaIncorreta_1,
+                "isCorrectAnswer": false,
             };
 
             let resposta2 = {
-                text: respostaIncorreta_2,
-                image: URLrespostaIncorreta_2,
-                isCorrectAnswer: false,
+                "text": respostaIncorreta_2,
+                "image": URLrespostaIncorreta_2,
+                "isCorrectAnswer": false,
             };
             let resposta3 = {
-                text: respostaIncorreta_3,
-                image: URLrespostaIncorreta_3,
-                isCorrectAnswer: false,
+                "text": respostaIncorreta_3,
+                "image": URLrespostaIncorreta_3,
+                "isCorrectAnswer": false,
             };
             let resposta = [];
 
@@ -639,9 +639,9 @@ function CriarNives() {
                 resposta.push(resposta3);
             }
             let toSurtando = {
-                title: pergunta,
-                color: cor,
-                answers: resposta,
+                "title": pergunta,
+                "color": cor,
+                "answers": resposta,
             };
             questoes.push(toSurtando);
         }
@@ -718,10 +718,10 @@ function AddQuizz() {
 
         if (tituloNivel.length >= 10 && descricaoNivel.length >= 30) {
             let x = {
-                title: tituloNivel,
-                image: imagemNivel,
-                text: descricaoNivel,
-                minValue: porcentagemNivel,
+                "title": tituloNivel,
+                "image": imagemNivel,
+                "text": descricaoNivel,
+                "minValue": porcentagemNivel,
             };
 
             nivel.push(x);
@@ -739,10 +739,10 @@ function AddQuizz() {
         return;
     } else {
         let z = {
-            title: informacaoDoQuizz.nome,
-            image: informacaoDoQuizz.imagem,
-            questions: questoes,
-            levels: nivel,
+            "title": informacaoDoQuizz.nome,
+            "image": informacaoDoQuizz.imagem,
+            "questions": questoes,
+            "levels": nivel,
         };
 
         console.log(z);
