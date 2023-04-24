@@ -3,9 +3,9 @@ axios.defaults.headers.common['Authorization'] = 'aSaefb8T8sX6LpwwvW21qigP';
 let acertos = 0, contador = 0, verificarTamanhoNiveis = 0, percentualAcertos = 0;
 let chamarQuizNovamente;
 let quizRetornado;
-let arrayIDs = [];
+let arrayLocal = [];
 let respostaAPI = [];
-console.log(arrayIDs);
+console.log(arrayLocal);
 console.log(respostaAPI);
 
 
@@ -27,25 +27,23 @@ function exibirQuizz(resposta) {
     let quizzesDoUsuario = document.querySelector(".seusQuizzes .containerQuizzes");
     quizzesPublicos.innerHTML = "";
     quizzesDoUsuario.innerHTML = "";
-    let listaLocal = localStorage.getItem("arrayIDs");
+    let listaLocal = localStorage.getItem("arrayLocal");
     let countUsuario = 0;
    
 
     for (let i = 0; i < listaResp.length; i++) {
-        if(listaLocal !== null){
-            if(listaLocal.includes(listaResp[i].id)){
-                countUsuario++;
-                quizzesDoUsuario.innerHTML += `
-                <div class="caixaQuizz" data-test="my-quiz" onclick="selecionarQuizz(${listaResp[i].id})">
-                    <img class="thumbnailQuizz" src="${listaResp[i].image}"/>
-                    <p class="tituloQuizz">${listaResp[i].title}</p>
-                    <div class="gradientOverlay"></div>
-                </div>
-                `;
-            }
-        }else {
+        if(listaLocal === null || !listaLocal.includes(listaResp[i].id)){
             quizzesPublicos.innerHTML += `
             <div class="caixaQuizz" data-test="others-quiz" onclick="selecionarQuizz(${listaResp[i].id})">
+                <img class="thumbnailQuizz" src="${listaResp[i].image}"/>
+                <p class="tituloQuizz">${listaResp[i].title}</p>
+                <div class="gradientOverlay"></div>
+            </div>
+            `;
+        } else {
+            countUsuario++;
+            quizzesDoUsuario.innerHTML += `
+            <div class="caixaQuizz" data-test="my-quiz" onclick="selecionarQuizz(${listaResp[i].id})">
                 <img class="thumbnailQuizz" src="${listaResp[i].image}"/>
                 <p class="tituloQuizz">${listaResp[i].title}</p>
                 <div class="gradientOverlay"></div>
