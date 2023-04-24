@@ -6,6 +6,8 @@ let quizRetornado;
 let arrayIDs = [];
 let respostaAPI = [];
 console.log(arrayIDs);
+console.log(respostaAPI);
+
 
 puxarQuizz();
 
@@ -104,7 +106,7 @@ function reiniciarQuiz(){
 }
 
 function rolagem(){
-    window.scrollBy(0, 680);
+    window.scrollBy(0, 645);
 }
 function mostrarResultador(){
     let arrayNivel = [];
@@ -161,6 +163,7 @@ function verificar(resposta, verdadeiroOuFalso){
     }
     
     contador++;
+    
 
     resposta.classList.remove('esbranquicado');
     
@@ -180,15 +183,18 @@ function selecionar(resposta){
     setTimeout(rolagem, 2000);
     
 }
-
+function scrollIniciarQuiz(){
+    window.scroll(0, 220);
+}
 function irParaQuizz(resposta) {
     window.scroll(0, 0);
+    setTimeout(scrollIniciarQuiz, 2000);
     //gera as perguntas em ordem aleatoria escondendo a primeira tela e mostrando a segunda
     quizRetornado = resposta.data;
     
     let quizSelecionado = resposta.data;
    
-    console.log(quizSelecionado);
+   
 
     let perguntas = document.querySelector('.tela2');
     perguntas.innerHTML = '';
@@ -204,7 +210,7 @@ function irParaQuizz(resposta) {
     for(let i = 0; i < quizSelecionado.questions.length; i++){
         
         let sortearRespostas = [];
-       
+       console.log(quizSelecionado);
 
         for(let j = 0; j < quizSelecionado.questions[i].answers.length; j++){
             sortearRespostas.push(quizSelecionado.questions[i].answers[j]);
@@ -215,7 +221,7 @@ function irParaQuizz(resposta) {
 
         perguntas.innerHTML += `
             <div data-test="question" onclick="selecionar(this)" class="container-perguntas  id-${[i]}">
-                <div data-test="question-title" class="titulo-pergunta">${quizSelecionado.questions[i].title}</div>
+                <div id="mudaCor${[i]}" data-test="question-title" class="titulo-pergunta">${quizSelecionado.questions[i].title}</div>
                 <div class="caixa-questoes">
                     <div data-test="answer" onclick="verificar(this, ${sortearRespostas[0].isCorrectAnswer})" class="selecionar-questao">
                         <img  src="${sortearRespostas[0].image}">
@@ -235,7 +241,7 @@ function irParaQuizz(resposta) {
                     </div>
             </div>
         `;
-
+        document.getElementById(`mudaCor${[i]}`).style.backgroundColor = quizSelecionado.questions[i].color;
     }
    
 
