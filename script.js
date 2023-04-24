@@ -261,7 +261,7 @@ let QtdPerguntasQuizz;
 let QtdNivelQuizz;
 
 function CriarQuizz(){
-    
+    //*esconde as outra telas e mostra a tela de criação do quiz
     const tela1 = document.querySelector('.tela1');
     tela1.classList.add('escondido');
 
@@ -286,11 +286,13 @@ function CriarQuizz(){
 }
 
 function AbrirPerguntas(i){
+    //*expandi as perguntas do quiz
     const pergunta = document.querySelectorAll('.pergunta');
   
     pergunta[i].classList.toggle('escondido');
 }
 function AbrirNivel(i){
+    //*expandi os niveis do quiz
     const Nivel = document.querySelectorAll('.nivel');
   
     Nivel[i].classList.toggle('escondido');
@@ -308,6 +310,7 @@ function imagemValida(imagem) {
 
 
 function CriarPerguntas(){
+    //*pega as informações do quiz e ja organiza nas proximas paginas
 
     NomeQuizz = document.querySelector('.NomeQuizz').value;
     ImgQuizz = document.querySelector('.ImgQuizz').value;
@@ -316,9 +319,9 @@ function CriarPerguntas(){
 
     numeroptg = QtdPerguntasQuizz;
     numeronivel = QtdNivelQuizz;
-
+    //* verifica as informaçoes do quiz
     if(NomeQuizz.length >= 20 && NomeQuizz.length <= 65 && QtdPerguntasQuizz >=3 && QtdNivelQuizz>=2 && imagemValida(ImgQuizz)){
-
+        //* se ok ele add as perguntas, os nivels e a tela de sucesso
         informacaoDoQuizz = {nome: NomeQuizz, 
                              imagem: ImgQuizz, 
                              perguntas:QtdPerguntasQuizz, 
@@ -338,6 +341,7 @@ function CriarPerguntas(){
         pag3_4.innerHTML += `<h1 class="titulo margintop">Seu quizz está pronto!</h1>`
 
         for(let i = 0; i < QtdPerguntasQuizz; i++){
+            //*faz as perguntas (a primeira pergunta tem que vir aberta)
            if(i === 0){
             pag3_2.innerHTML +=
                                 ` 
@@ -411,6 +415,7 @@ function CriarPerguntas(){
         }
         for(let i = 0; i < QtdNivelQuizz; i++){
             if(i===0){
+                //* faz os niveis (o primeiro nivel tem que vir aberto)
             pag3_3.innerHTML +=
             `
             <div data-test="level-ctn">
@@ -445,10 +450,12 @@ function CriarPerguntas(){
                                 `;
             }
         }
+        //*coloca os botões no final da tela
         pag3_2.innerHTML += 
                         `<div class="BotaoVermelho Tela3_ParaNives" data-test="go-create-levels" onclick="CriarNives()">Prosseguir pra criar níveis</div>`;
         pag3_3.innerHTML +=
                         ` <div class="BotaoVermelho Tela3_FinalizarQuizz" data-test="finish" onclick="AddQuizz()">Finalizar Quizz</div>`;
+        //*cria a pagina 3-4
         pag3_4.innerHTML += `
                         <div data-test="success-banner" class="caixaQuizz centralizar">
                             <img class="thumbnailQuizz" src="${informacaoDoQuizz.imagem}">
@@ -458,6 +465,7 @@ function CriarPerguntas(){
                         <div class="BotaoVermelho Tela3_AcessarQuizz" onclick="jogarQuizz()">Acessar Quizz</div>
                         <div class="Texto_Cinza Tela3_VoltarHome" onclick="voltarHome()">Voltar pra home</div>
                         `;
+        //*mostra a proxima pagina
         pag3_1.classList.add('escondido');
         pag3_2.classList.remove('escondido');
 
@@ -468,6 +476,7 @@ function CriarPerguntas(){
 }
 
 function CriarNives(){
+    
     const hex =['a','b','c','d','e','f','A','B','C','D','E','F','0','9','8','7','6','5','4','3','2','1'];
     let pergunta = document.querySelector(`.pergunta0`).value;
     let cor = document.querySelector(`.cor0`).value;
@@ -480,8 +489,10 @@ function CriarNives(){
     let respostaIncorreta_3 = document.querySelector(`.respostaIncorreta0_3`).value;
     let URLrespostaIncorreta_3 = document.querySelector(`.URLrespostaIncorreta0_3`).value;
     
+    //*Confere as infomações das pergutas
     if(pergunta.length >= 20 && cor[0]=='#' && respostaCorreta !='' && respostaIncorreta_1 != '' && hex.indexOf(cor[1]) > 0 && 
     hex.indexOf(cor[2]) > 0 && hex.indexOf(cor[3]) > 0 && hex.indexOf(cor[4]) > 0 && hex.indexOf(cor[5]) > 0 && hex.indexOf(cor[6]) > 0){
+        //* se okay faz o loop pra salvar as perguntas na array
             for(let c =0; c < numeroptg; c++){
                 pergunta = document.querySelector(`.pergunta${c}`).value;
                 cor = document.querySelector(`.cor${c}`).value;
@@ -557,6 +568,7 @@ function CriarNives(){
                 pag3_3.classList.remove('escondido');
         }
         else{
+            //* caso falhe fala para ele conferir os dados
             alert('Confira os dados');
             console.log(perguntas);
         }
@@ -564,6 +576,7 @@ function CriarNives(){
 }
 
 function addOk(res){
+    //* add o quizz no local storage
     id = res.data.id;
     if (localStorage.getItem("arrayLocal") !== null) {
         let listaLocalStr = localStorage.getItem("arrayLocal");
@@ -582,6 +595,7 @@ function addOk(res){
 }
 
 function AddQuizz(){
+    //* faz algumas verificações para ver se os niveis estao dentro do parametros e monta a string para ser mandada para ao servidor
     let contador = 0;
     let temZero = 0;
     for (let i = 0; i < numeronivel; i++) {
@@ -637,7 +651,7 @@ function AddQuizz(){
         console.log(z);
         quizes.push(z);
         console.log(quizes);
-
+        
         let promessa = axios.post('https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes',z);
         promessa.then(addOk);
         
@@ -653,6 +667,7 @@ function AddQuizz(){
 }
 
 function voltarHome(){
+    //*volta pra tela 1 atualizada e esconde as outras telas
     window.scroll(0, 0);
     window.location.reload();
 
@@ -669,7 +684,7 @@ function voltarHome(){
 }
 
 function jogarQuizz(){
-    //?Função que faz o quizz rodar com o novo quizz como argumento
+    //*Função que faz o quizz rodar com o novo quizz como argumento
     const tela3 = document.querySelector('.tela3');
     tela3.classList.add('escondido');
     selecionarQuizz(id);
