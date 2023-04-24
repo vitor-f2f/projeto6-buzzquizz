@@ -16,4 +16,16 @@
     .tela1 {
         padding-top: 100px;
     }
+    .container-perguntas{
+        width: 90%;
+    }
+    .selecionar-questao{
+        width: 42vw;
+    }
+    .caixa-questoes img{
+        width: 100%;
+    }
+    .finalizacao-quiz{
+        width: 90%;
+     }
 }
