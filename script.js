@@ -557,7 +557,8 @@ function CriarNives() {
         hex.indexOf(cor[3]) > 0 &&
         hex.indexOf(cor[4]) > 0 &&
         hex.indexOf(cor[5]) > 0 &&
-        hex.indexOf(cor[6]) > 0
+        hex.indexOf(cor[6]) > 0 &&
+        imagemValida(URLrespostaCorreta)
     ) {
         //* se okay faz o loop pra salvar as perguntas na array
         for (let c = 0; c < numeroptg; c++) {
