@@ -572,7 +572,7 @@ function addOk(res){
         localStorage.removeItem("arrayLocal");
         localStorage.setItem("arrayLocal", listaLocalStr);
     } else {
-        let idComoArray = [i];
+        let idComoArray = [id];
         idComoArray = JSON.stringify();
         localStorage.setItem("arrayLocal", idComoArray);
     }
@@ -588,7 +588,7 @@ function AddQuizz(){
         let porcentagemNivel = document.querySelector(`.porcentagemNivel${i}`).value;
         let imagemNivel = document.querySelector(`.imagemNivel${i}`).value;
         let descricaoNivel = document.querySelector(`.descricaoNivel${i}`).value;
-        if (porcentagemNivel == 0) {
+        if (porcentagemNivel[i] == 0) {
             temZero = 1;
         }
         if (tituloNivel.length < 10 || !imagemValida(imagemNivel) || descricaoNivel.legnth < 30 || temZero == 0 || porcentagemNivel < 0 || porcentagemNivel > 100) {
