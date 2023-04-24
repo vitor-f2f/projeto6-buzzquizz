@@ -194,11 +194,11 @@ function irParaQuizz(resposta) {
     perguntas.innerHTML = '';
     
     perguntas.innerHTML += `
-    <div data-test="banner"  class="imagem-cabecalho gradiente-opacity">
-                <img  src="${quizSelecionado.image}">
-                <div class="mascara-cabecalho"></div>
-                <span>${quizSelecionado.title}</span>
-            </div>
+        <div data-test="banner"  class="imagem-cabecalho gradiente-opacity">
+            <img  src="${quizSelecionado.image}">
+            <div class="mascara-cabecalho"></div>
+            <span>${quizSelecionado.title}</span>
+        </div>
     `;  
 
     for(let i = 0; i < quizSelecionado.questions.length; i++){
@@ -214,7 +214,6 @@ function irParaQuizz(resposta) {
     
 
         perguntas.innerHTML += `
-            
             <div data-test="question" onclick="selecionar(this)" class="container-perguntas  id-${[i]}">
                 <div data-test="question-title" class="titulo-pergunta">${quizSelecionado.questions[i].title}</div>
                 <div class="caixa-questoes">
