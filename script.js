@@ -6,9 +6,9 @@ let acertos = 0,
     percentualAcertos = 0;
 let chamarQuizNovamente;
 let quizRetornado;
-let arrayLocal = [];
+let ids = [];
 let respostaAPI = [];
-console.log(arrayLocal);
+console.log(ids);
 console.log(respostaAPI);
 
 puxarQuizz();
@@ -32,7 +32,7 @@ function exibirQuizz(resposta) {
     );
     quizzesPublicos.innerHTML = "";
     quizzesDoUsuario.innerHTML = "";
-    let listaLocal = localStorage.getItem("arrayLocal");
+    let listaLocal = localStorage.getItem("ids");
     let countUsuario = 0;
 
     for (let i = 0; i < listaResp.length; i++) {
@@ -606,26 +606,26 @@ function CriarNives() {
             perguntas.push(x);
 
             let resposta0 = {
-                text: respostaCorreta,
-                image: URLrespostaCorreta,
-                isCorrectAnswer: true,
+                "text": respostaCorreta,
+                "image": URLrespostaCorreta,
+                "isCorrectAnswer": true,
             };
 
             let resposta1 = {
-                text: respostaIncorreta_1,
-                image: URLrespostaIncorreta_1,
-                isCorrectAnswer: false,
+                "text": respostaIncorreta_1,
+                "image": URLrespostaIncorreta_1,
+                "isCorrectAnswer": false,
             };
 
             let resposta2 = {
-                text: respostaIncorreta_2,
-                image: URLrespostaIncorreta_2,
-                isCorrectAnswer: false,
+                "text": respostaIncorreta_2,
+                "image": URLrespostaIncorreta_2,
+                "isCorrectAnswer": false,
             };
             let resposta3 = {
-                text: respostaIncorreta_3,
-                image: URLrespostaIncorreta_3,
-                isCorrectAnswer: false,
+                "text": respostaIncorreta_3,
+                "image": URLrespostaIncorreta_3,
+                "isCorrectAnswer": false,
             };
             let resposta = [];
 
@@ -639,9 +639,9 @@ function CriarNives() {
                 resposta.push(resposta3);
             }
             let toSurtando = {
-                title: pergunta,
-                color: cor,
-                answers: resposta,
+                "title": pergunta,
+                "color": cor,
+                "answers": resposta,
             };
             questoes.push(toSurtando);
         }
@@ -662,17 +662,17 @@ function addOk(res) {
     //* add o quizz no local storage
     id = res.data.id;
     console.log(id);
-    if (localStorage.getItem("arrayLocal") !== null) {
-        let listaLocalStr = localStorage.getItem("arrayLocal");
+    if (localStorage.getItem("ids") !== null) {
+        let listaLocalStr = localStorage.getItem("ids");
         let listaLocalArray = JSON.parse(listaLocalStr);
         listaLocalArray.push(id);
         listaLocalStr = JSON.stringify(listaLocalArray);
-        localStorage.removeItem("arrayLocal");
-        localStorage.setItem("arrayLocal", listaLocalStr);
+        localStorage.removeItem("ids");
+        localStorage.setItem("ids", listaLocalStr);
     } else {
         let idComoArray = [id];
         idComoArray = JSON.stringify();
-        localStorage.setItem("arrayLocal", idComoArray);
+        localStorage.setItem("ids", idComoArray);
     }
 
     return id;
@@ -718,10 +718,10 @@ function AddQuizz() {
 
         if (tituloNivel.length >= 10 && descricaoNivel.length >= 30) {
             let x = {
-                title: tituloNivel,
-                image: imagemNivel,
-                text: descricaoNivel,
-                minValue: porcentagemNivel,
+                "title": tituloNivel,
+                "image": imagemNivel,
+                "text": descricaoNivel,
+                "minValue": porcentagemNivel,
             };
 
             nivel.push(x);
@@ -739,8 +739,8 @@ function AddQuizz() {
         return;
     } else {
         let z = {
-            title: informacaoDoQuizz.nome,
-            image: informacaoDoQuizz.imagem,
+            "title": informacaoDoQuizz.nome,
+            "image": informacaoDoQuizz.imagem,
             questions: questoes,
             levels: nivel,
         };
