@@ -188,7 +188,7 @@ function irParaQuizz(resposta) {
     
     let quizSelecionado = resposta.data;
    
-
+    console.log(quizSelecionado);
 
     let perguntas = document.querySelector('.tela2');
     perguntas.innerHTML = '';
