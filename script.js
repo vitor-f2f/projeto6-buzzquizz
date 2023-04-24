@@ -626,10 +626,6 @@ function AddQuizz(){
         alert("Confira os dados");
         return;
     }
-    else if(contador > 1){
-        alert("Confira os dados");
-        return;
-    }
     else{
         let z = {
             title:informacaoDoQuizz.nome,
