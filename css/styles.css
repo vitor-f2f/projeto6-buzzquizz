@@ -201,7 +201,7 @@ body {
     width: 100%;
     height: 138px;
     margin-top: 60px;
-    background-color: #434CA0;
+
 
     font-size: 23px;
     font-weight: 700;
@@ -219,13 +219,14 @@ body {
     
  }
  .caixa-questoes img{
-   width: 329px;
+   width: 100%;
    height: 175px;
    border-radius: 1px;
  }
  .selecionar-questao{
     display: flex;
     flex-direction: column;
+    width: 24vw;
  }
  .selecionar-questao span{
     line-height: 40px;
