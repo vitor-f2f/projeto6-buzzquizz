@@ -27,6 +27,7 @@ function exibirQuizz(resposta) {
     quizzesDoUsuario.innerHTML = "";
     let listaLocal = localStorage.getItem("arrayIDs");
     let countUsuario = 0;
+   
 
     for (let i = 0; i < listaResp.length; i++) {
         if(listaLocal !== null){
@@ -213,8 +214,8 @@ function irParaQuizz(resposta) {
     
 
         perguntas.innerHTML += `
-            <div  onclick="selecionar(this)" class="container-perguntas  id-${[i]}">
-                <div data-test="question"  class="titulo-pergunta">${quizSelecionado.questions[i].title}</div>
+            <div  data-test="question" onclick="selecionar(this)" class="container-perguntas  id-${[i]}">
+                <div  class="titulo-pergunta">${quizSelecionado.questions[i].title}</div>
                 <div class="caixa-questoes">
                     <div data-test="answer" onclick="verificar(this, ${sortearRespostas[0].isCorrectAnswer})" class="selecionar-questao">
                         <img  src="${sortearRespostas[0].image}">
