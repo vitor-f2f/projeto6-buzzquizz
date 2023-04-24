@@ -754,9 +754,6 @@ function AddQuizz() {
         );
         promessa.then(addOk);
 
-        quizesStr = JSON.stringify(quizes);
-        localStorage.setItem("id", quizesStr);
-
         const pag3_3 = document.querySelector(".pag3_3");
         pag3_3.classList.add("escondido");
 
